@@ -1,6 +1,5 @@
 let height, width, row, col;
 let create = document.getElementById('creation-form');
-let clear = document.getElementById('clear');
 let table = document.getElementById('pixel_canvas');
 let colorPicker = document.getElementById('colorPicker');
 let color = "#000";

@@ -41,7 +41,7 @@ input[type=range] {
     width: 100%;
 }
 
-input[type=submit], #clear {
+input[type=submit] {
     background-color: transparent;
     color: #EBEDEC;
     border: 2px solid #EBEDEC;
@@ -50,10 +50,10 @@ input[type=submit], #clear {
     margin-bottom: 10px;
 }
 
-input:focus, #clear {
+input:focus {
     outline-width: 0;
 }
-input:hover, #clear {
+input:hover {
     cursor: pointer;
 }
 
