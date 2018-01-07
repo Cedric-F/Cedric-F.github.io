@@ -28,10 +28,6 @@ function makeGrid(evt) {
 	}
 }
 
-function clearGrid() {
-	document.getElementsByTagName('td').removeAttr('style');
-}
-
 function cellColor() {
 	this.style.backgroundColor = color;
 }
