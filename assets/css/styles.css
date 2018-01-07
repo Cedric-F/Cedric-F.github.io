@@ -3,6 +3,10 @@
     src: url(../fonts/Cyrodiil.ttf) format("truetype");
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     margin: 0;
     text-align: center;
@@ -14,25 +18,20 @@ body {
 }
 
 main {
-    margin: auto;
+    margin: 0 auto;
     grid-column: 2/9;
     width: fixed;
 }
 
 aside {
-    margin: 0;
+    margin: 0 auto;
     background-color: #0008;
     height: 100%;
     color: #EBEDEC;
     padding: 0 20px;
-    position: fixed;
-    width: 200px;
     grid-column: 1/2;
 }
 
-h1 {
-    font-size: 60px;
-}
 
 span {
     font-size: 30px;
@@ -42,18 +41,19 @@ input[type=range] {
     width: 100%;
 }
 
-#create {
+input[type=submit], #clear {
     background-color: transparent;
     color: #EBEDEC;
     border: 2px solid #EBEDEC;
     width: 75px;
     height: 35px;
+    margin-bottom: 10px;
 }
 
-input:focus {
+input:focus, #clear {
     outline-width: 0;
 }
-input:hover {
+input:hover, #clear {
     cursor: pointer;
 }
 
@@ -71,4 +71,11 @@ table {
 td {
     width: 7px;
     height: 7px;
+}
+
+.audio {
+    margin-top: 10vh;
+}
+audio {
+    width: 200px;
 }

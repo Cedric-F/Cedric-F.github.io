@@ -1,9 +1,9 @@
-let height, width, row, col, color_new;
-let size = document.getElementById('sizePicker');
+let height, width, row, col;
+let create = document.getElementById('creation-form');
+let clear = document.getElementById('clear');
 let table = document.getElementById('pixel_canvas');
 let colorPicker = document.getElementById('colorPicker');
 let color = "#000";
-
 
 
 function makeGrid(evt) {
@@ -28,6 +28,10 @@ function makeGrid(evt) {
 	}
 }
 
+function clearGrid() {
+	document.getElementsByTagName('td').removeAttr('style');
+}
+
 function cellColor() {
 	this.style.backgroundColor = color;
 }
@@ -36,4 +40,5 @@ colorPicker.addEventListener('change', function(){
 	color = colorPicker.value;
 });
 
-size.addEventListener('submit', makeGrid);
+create.addEventListener('submit', makeGrid);
+clear.addEventListener('onclick', clearGrid);
