@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "Cyrodiil";
+    src: url(fonts/Cyrodiil.ttf) format("truetype");
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    font-family: 'Cyrodiil';
+    background: url('img/swp.jpg') fixed;
+    font-size: 24px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+main {
+    margin: auto;
+    grid-column: 2/9;
+    width: fixed;
+}
+
+aside {
+    margin: 0;
+    background-color: #0008;
+    height: 100%;
+    color: #EBEDEC;
+    padding: 0 20px;
+    position: fixed;
+    width: 200px;
+    grid-column: 1/2;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+span {
+    font-size: 30px;
+}
+
+input[type=range] {
+    width: 100%;
+}
+
+#create {
+    background-color: transparent;
+    color: #EBEDEC;
+    border: 2px solid #EBEDEC;
+    width: 75px;
+    height: 35px;
+}
+
+input:focus {
+    outline-width: 0;
+}
+input:hover {
+    cursor: pointer;
+}
+
+table,
+tr,
+td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td {
+    width: 7px;
+    height: 7px;
+}

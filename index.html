@@ -1,1 +1,29 @@
-Hello World
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pixel Art Maker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <aside>
+        <h2>Dimensions</h2>
+        <form id="sizePicker">
+            <label for="input_height">Height:</label><input type="range" id="input_height" name="height" min="1" max="100" value="1"><span class="h"></span>
+            <label for="input_width">Width:</label><input type="range" id="input_width" name="width" min="1" max="100" value="1"><span class="w"></span>
+            <input type="submit" id="create" value="Create">
+        </form>
+
+        <h2>Color</h2>
+        <input type="color" id="colorPicker">
+    </aside>
+    <main>
+        <h1>Drem yol lok<br><span>Dovahkiin</span></h1>
+        
+        <h2>Design Canvas</h2>
+        <table id="pixel_canvas"></table>
+    </main>
+    
+    <script src="designs.js"></script>
+</body>
+</html>
