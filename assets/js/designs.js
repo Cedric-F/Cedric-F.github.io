@@ -1,11 +1,13 @@
 let height, width, row, col;
-let create = document.getElementById('creation-form');
-let table = document.getElementById('pixel_canvas');
-let colorPicker = document.getElementById('colorPicker');
 let color = "#000";
+const create = document.getElementById('creation-form');
+const clear = document.getElementById('clear');
+const table = document.getElementById('pixel_canvas');
+const colorPicker = document.getElementById('colorPicker');
+const cell = document.getElementsByTagName("td");
 
 
-function makeGrid(evt) {
+const makeGrid = (evt) => {
 	evt.preventDefault();
     table.innerHTML = "";
 	height = document.getElementById('input_height').value;
@@ -21,18 +23,26 @@ function makeGrid(evt) {
 		table.appendChild(row);
 	}
 
-	let cell = document.getElementsByTagName("td");
-	for (var i = 0; i < cell.length; i++) {
+	for (let i = 0; i < cell.length; i++) {
 		cell[i].addEventListener('click', cellColor);
 	}
 }
 
-function cellColor() {
-	this.style.backgroundColor = color;
+const clearGrid = () => {
+	for (let i = 0; i < cell.length; i++) {
+		if (cell[i].hasAttribute('style')){
+			cell[i].removeAttribute('style');
+		}
+	}
 }
 
-colorPicker.addEventListener('change', function(){
+const cellColor = (evt) => {
+	evt.currentTarget.setAttribute('style', 'background-color:' + color);
+}
+
+colorPicker.addEventListener('change', () => {
 	color = colorPicker.value;
 });
 
 create.addEventListener('submit', makeGrid);
+clear.addEventListener('click', clearGrid);
