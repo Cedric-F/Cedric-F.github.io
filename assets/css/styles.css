@@ -15,6 +15,7 @@ body {
     font-size: 24px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    cursor: url(../cursor/skyrim.cur), progress !important;
 }
 
 main {
@@ -24,12 +25,14 @@ main {
 }
 
 aside {
-    margin: 0 auto;
+    margin: 0 auto 0 20px;
     background-color: #0008;
     height: 100%;
     color: #EBEDEC;
     padding: 0 20px;
     grid-column: 1/2;
+    border-left: 2px inset white;
+    border-right: 2px outset white;
 }
 
 
@@ -48,13 +51,15 @@ input[type=submit], #clear {
     width: 75px;
     height: 35px;
     margin-bottom: 10px;
+    font-family: inherit;
+    font-size: 0.75em;
 }
 
 input:focus, #clear:focus {
     outline-width: 0;
 }
 input:hover, #clear:hover {
-    cursor: pointer;
+    cursor: url('../cursor/skyrim-hand.cur'), pointer !important;
 }
 
 table,
@@ -79,4 +84,14 @@ td {
 }
 audio {
     width: 200px;
+}
+
+.fade-effect {
+    display: block;
+    transition: background 0.5s;
+}
+
+.fade-effect:hover {
+    background: #fff4;
+    cursor: url(../cursor/skyrim-text.cur), text !important;
 }

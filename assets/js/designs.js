@@ -7,7 +7,7 @@ const colorPicker = document.getElementById('colorPicker');
 const cell = document.getElementsByTagName("td");
 
 
-const makeGrid = (evt) => {
+const makeGrid = evt => {
 	evt.preventDefault();
     table.innerHTML = "";
 	height = document.getElementById('input_height').value;
@@ -28,7 +28,7 @@ const makeGrid = (evt) => {
 	}
 }
 
-const clearGrid = () => {
+const clearGrid = _ => {
 	for (let i = 0; i < cell.length; i++) {
 		if (cell[i].hasAttribute('style')){
 			cell[i].removeAttribute('style');
@@ -36,8 +36,22 @@ const clearGrid = () => {
 	}
 }
 
-const cellColor = (evt) => {
+const hexToRGB = hex => {
+	let r, g, b;
+	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+const cellColor = evt => {
 	evt.currentTarget.setAttribute('style', 'background-color:' + color);
+}
+
+const removeColor = evt => {
+	let current = evt.currentTarget.hasAttribute('style');
+	console.log(current);
 }
 
 colorPicker.addEventListener('change', () => {
