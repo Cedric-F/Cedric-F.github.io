@@ -36,4 +36,3 @@ colorPicker.addEventListener('change', function(){
 });
 
 create.addEventListener('submit', makeGrid);
-clear.addEventListener('onclick', clearGrid);
