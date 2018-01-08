@@ -19,7 +19,7 @@ const cellColor = evt => {
 	current_color = evt.currentTarget.style.backgroundColor;
 	new_color = hexToRGB(colorPicker.value);
 
-	current_color !== new_color
+	(current_color !== new_color)
 	? evt.currentTarget.style.backgroundColor = new_color
 	: evt.currentTarget.removeAttribute('style');
 }

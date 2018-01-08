@@ -21,7 +21,6 @@ body {
 main {
     margin: 0 auto;
     grid-column: 2/9;
-    width: fixed;
 }
 
 aside {
@@ -38,6 +37,10 @@ aside {
 
 span {
     font-size: 30px;
+}
+
+h1 {
+    line-height: 0.75em;
 }
 
 input[type=range] {
