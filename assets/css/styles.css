@@ -9,13 +9,13 @@ html, body {
 
 body {
     margin: 0;
-    text-align: center;
-    font-family: 'Cyrodiil';
-    background: url('../img/swp.jpg') fixed no-repeat;
-    font-size: 24px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    cursor: url(../cursor/skyrim.cur), progress !important;
+    font-family: 'Cyrodiil';
+    font-size: 24px;
+    text-align: center;
+    background: url('../img/swp.jpg') fixed no-repeat;
+    cursor: url(../cursor/skyrim.cur), default !important;
 }
 
 main {
@@ -23,24 +23,25 @@ main {
     grid-column: 2/9;
 }
 
+/* Aside */
+
 aside {
     margin: 0 20px;
-    background-color: #0008;
-    height: 100%;
-    color: #EBEDEC;
     padding: 0 20px;
+    height: 100%;
     grid-column: 1/2;
+    color: #EBEDEC;
+    background-color: #0008;
     border-left: 2px inset white;
     border-right: 2px outset white;
 }
 
+h1 {
+    line-height: 0.75em;
+}
 
 span {
     font-size: 30px;
-}
-
-h1 {
-    line-height: 0.75em;
 }
 
 input[type=range] {
@@ -48,12 +49,12 @@ input[type=range] {
 }
 
 input[type=submit], #clear {
-    background-color: transparent;
-    color: #EBEDEC;
-    border: 2px solid #EBEDEC;
     width: 75px;
     height: 35px;
     margin-bottom: 10px;
+    color: #EBEDEC;
+    background-color: transparent;
+    border: 2px solid #EBEDEC;
     font-family: inherit;
     font-size: 0.75em;
 }
@@ -65,11 +66,29 @@ input:hover, #clear:hover {
     cursor: url('../cursor/skyrim-hand.cur'), pointer !important;
 }
 
-table,
-tr,
-td {
-    border: 1px solid black;
+.labels {
+    display: block;
+    transition: background 0.5s;
 }
+
+.labels:hover {
+    background: #fff4;
+    cursor: url(../cursor/skyrim-text.cur), text !important;
+}
+
+.eraser {
+    padding-top: 10px;
+    display: block;
+}
+
+.audio {
+    margin-top: 8vh;
+}
+audio {
+    width: 200px;
+}
+
+/* Grid */
 
 table {
     border-collapse: collapse;
@@ -77,24 +96,14 @@ table {
     background-color: #fff6;
 }
 
+table,
+tr,
+td {
+    border: 1px solid black;
+    outline: none;
+}
+
 td {
     width: 7px;
     height: 7px;
-}
-
-.audio {
-    margin-top: 10vh;
-}
-audio {
-    width: 200px;
-}
-
-.fade-effect {
-    display: block;
-    transition: background 0.5s;
-}
-
-.fade-effect:hover {
-    background: #fff4;
-    cursor: url(../cursor/skyrim-text.cur), text !important;
 }

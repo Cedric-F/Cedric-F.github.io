@@ -10,16 +10,18 @@
         <h2>Dimensions</h2>
 
         <form id="creation-form">
-            <label for="input_height" class="fade-effect">Height:</label><input type="range" id="input_height" name="height" min="1" max="50" value="15">
-            <label for="input_width" class="fade-effect">Width:</label><input type="range" id="input_width" name="width" min="1" max="100" value="15">
+            <label for="input_height" class="labels">Height:</label><input type="range" id="input_height" name="height" min="1" max="50" value="15">
+            <label for="input_width" class="labels">Width:</label><input type="range" id="input_width" name="width" min="1" max="100" value="15">
             <input type="submit" value="Create">
         </form>
 
         <button id="clear">Clear</button>
 
-        <h2 class="fade-effect">Color</h2>
+        <h2 class="labels">Color</h2>
 
         <input type="color" id="colorPicker">
+
+        <label for="eraser" class="eraser">Eraser:<input type="checkbox" id="eraser"></label>
         
         <div class="audio">
             <h3>Skyrim Ambient Music</h3>

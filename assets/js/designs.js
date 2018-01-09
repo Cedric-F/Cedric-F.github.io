@@ -1,37 +1,34 @@
-"use strict";
+"use strict"; // strict mode
 
-let height, width, row, col, current_color, new_color;
+
+/* Variables */
+
+let height, width, row, col, color;
 let drag = false;
+let eraser = document.getElementById('eraser');
 const create = document.getElementById('creation-form');
 const clear = document.getElementById('clear');
 const table = document.getElementById('pixel_canvas');
 const colorPicker = document.getElementById('colorPicker');
 const cell = document.getElementsByTagName("td");
 
-const hexToRGB = hex => {
-	let rgb = {
-		'r' : parseInt(hex.substr(1,2),16),
-		'g' : parseInt(hex.substr(3,2),16),
-		'b' : parseInt(hex.substr(5,2),16)
-	};
-    return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`; // convert the hex color in the "rgb(r, g, b)" format. e.g: #ffffff -> 255, 255, 255
+
+/* Functions */
+
+const colors = e => { // colors the cells. if the eraser option is checked, cleanse them instead
+	if (!eraser.checked) {
+		color = colorPicker.value;
+		e.target.style.backgroundColor = color;
+	} else {
+		e.target.removeAttribute('style');
+	}
   }
 
-  const colors = c => { // c for "cell"
-  	current_color = c.target.style.backgroundColor; // get the current color of the cell
-	new_color = hexToRGB(colorPicker.value); // convert the selected color in rgb
-
-	(current_color !== new_color) // if the two colors don't match (are different)
-	? c.target.style.backgroundColor = new_color // apply new color to the cell(s)
-	: c.target.removeAttribute('style'); // else remove the color
-  }
-
-const makeGrid = evt => {
+const makeGrid = evt => { // add the desired amount of rows and cells to the table.
 	evt.preventDefault();
     table.innerHTML = ""; // empty the table content
 	height = document.getElementById('input_height').value;
 	width = document.getElementById('input_width').value;
-
 
 	for (let i = 0; i < height; i++) {
 		row = document.createElement('tr');
@@ -43,34 +40,36 @@ const makeGrid = evt => {
 	}
 
 	for (let i = 0; i < cell.length; i++) { // add the following eventListeners to all the cells
-		cell[i].addEventListener('mousedown', e => { // when holding mouse click
-			drag = true; // enable drag option
+		cell[i].addEventListener('mousedown', e => { // when holding mouse click, enable drag option and color the clicked cell
+			drag = true;
 			console.log('mousedown');
-			colors(e); // color the cell
+			colors(e);
 		});
-		cell[i].addEventListener('mouseup', _ => { // when releasing the mouse click
+		cell[i].addEventListener('mouseup', _ => { // when releasing the mouse click, disable the drag option
 			console.log('mouseup');
-			drag = false; // disable drag option
+			drag = false;
 		});
-		cell[i].addEventListener('mouseover', e => { // when hovering over the cells
-			if (drag) { // if the drag option is enabled (mousedown) is true then
+		cell[i].addEventListener('mouseover', e => { // when hovering over the cells, while mousedown is active, color them
+			if (drag) {
 				console.log('mouseover');
-				colors(e); // color the cells
+				colors(e);
 			}
 		});
 	}
 }
 
-const clearGrid = _ => {
-	for (let i = 0; i < cell.length; i++) { // navigate through each cell
-		if (cell[i].hasAttribute('style')){ // if a cell has a color then
-			cell[i].removeAttribute('style'); // remove it
+const clearGrid = _ => { // Navigate through each cell to cleanse the colored ones
+	for (let i = 0; i < cell.length; i++) {
+		if (cell[i].hasAttribute('style')) {
+			cell[i].removeAttribute('style');
 		}
 	}
 }
 
+/* Global event listeners */
+
 create.addEventListener('submit', makeGrid); // create the grid when submitting the form
-clear.addEventListener('click', clearGrid); // clear the grid (remove colors)
+clear.addEventListener('click', clearGrid); // clear the grid (cleanse colored cells)
 table.addEventListener('mouseleave', _ => { // hover outside the grid will cancel the drag option
 	drag = false;
 });
