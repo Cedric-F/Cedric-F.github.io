@@ -12,7 +12,7 @@
 
 - *Code Quality:*
   - [X] Code is ready for review. Properly indented and commented, easy readability.
-  - [X] JavaScript follows ![Udacity's styleguide](https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html).
+  - [X] JavaScript follows [Udacity's styleguide](https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html).
 
 ---
 
