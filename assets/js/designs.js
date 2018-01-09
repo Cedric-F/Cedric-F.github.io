@@ -1,4 +1,4 @@
-"use strict"; // strict mode
+'use strict'; // strict mode
 
 
 /* Variables */
@@ -6,26 +6,28 @@
 let height, width, row, col, color;
 let drag = false;
 let eraser = document.getElementById('eraser');
+let border = document.getElementById('borders')
+let toggleBorders = document.getElementById('toggle-borders')
 const create = document.getElementById('creation-form');
 const clear = document.getElementById('clear');
 const table = document.getElementById('pixel_canvas');
 const colorPicker = document.getElementById('colorPicker');
-const cell = document.getElementsByTagName("td");
+const cell = document.getElementsByTagName('td');
 
 
 /* Functions */
 
-const colors = e => { // colors the cells. if the eraser option is checked, cleanse them instead
+const dye = e => { // colors the cells. if the eraser option is checked, cleanse them instead
 	if (!eraser.checked) {
 		color = colorPicker.value;
 		e.target.style.backgroundColor = color;
 	} else {
 		e.target.removeAttribute('style');
 	}
-  }
+};
 
-const makeGrid = evt => { // add the desired amount of rows and cells to the table.
-	evt.preventDefault();
+const makeGrid = e => { // add the desired amount of rows and cells to the table.
+	e.preventDefault();
     table.innerHTML = ""; // empty the table content
 	height = document.getElementById('input_height').value;
 	width = document.getElementById('input_width').value;
@@ -39,11 +41,13 @@ const makeGrid = evt => { // add the desired amount of rows and cells to the tab
 		table.appendChild(row);
 	}
 
+	document.getElementById('box').style.visibility = "visible";
+
 	for (let i = 0; i < cell.length; i++) { // add the following eventListeners to all the cells
 		cell[i].addEventListener('mousedown', e => { // when holding mouse click, enable drag option and color the clicked cell
 			drag = true;
 			console.log('mousedown');
-			colors(e);
+			dye(e);
 		});
 		cell[i].addEventListener('mouseup', _ => { // when releasing the mouse click, disable the drag option
 			console.log('mouseup');
@@ -52,11 +56,11 @@ const makeGrid = evt => { // add the desired amount of rows and cells to the tab
 		cell[i].addEventListener('mouseover', e => { // when hovering over the cells, while mousedown is active, color them
 			if (drag) {
 				console.log('mouseover');
-				colors(e);
+				dye(e);
 			}
 		});
 	}
-}
+};
 
 const clearGrid = _ => { // Navigate through each cell to cleanse the colored ones
 	for (let i = 0; i < cell.length; i++) {
@@ -64,7 +68,7 @@ const clearGrid = _ => { // Navigate through each cell to cleanse the colored on
 			cell[i].removeAttribute('style');
 		}
 	}
-}
+};
 
 /* Global event listeners */
 
@@ -72,4 +76,11 @@ create.addEventListener('submit', makeGrid); // create the grid when submitting 
 clear.addEventListener('click', clearGrid); // clear the grid (cleanse colored cells)
 table.addEventListener('mouseleave', _ => { // hover outside the grid will cancel the drag option
 	drag = false;
+});
+border.addEventListener('change', _ => { // Toggle the visibility of the cells borders
+	if (border.checked) {
+		toggleBorders.innerHTML = "Disable";
+	} else {
+		toggleBorders.innerHTML = "Enable";
+	}
 });

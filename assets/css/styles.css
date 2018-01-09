@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "Cyrodiil";
-    src: url(../fonts/Cyrodiil.ttf) format("truetype");
+    font-family: 'Cyrodiil';
+    src: url(../fonts/Cyrodiil.ttf) format('truetype');
 }
 
 html, body {
@@ -15,7 +15,7 @@ body {
     font-size: 24px;
     text-align: center;
     background: url('../img/swp.jpg') fixed no-repeat;
-    cursor: url(../cursor/skyrim.cur), default !important;
+    cursor: url('../cursor/skyrim.cur'), default !important;
 }
 
 main {
@@ -40,7 +40,7 @@ h1 {
     line-height: 0.75em;
 }
 
-span {
+.greets {
     font-size: 30px;
 }
 
@@ -73,16 +73,21 @@ input:hover, #clear:hover {
 
 .labels:hover {
     background: #fff4;
-    cursor: url(../cursor/skyrim-text.cur), text !important;
+    cursor: url('../cursor/skyrim-text.cur'), text !important;
 }
 
-.eraser {
+.box {
     padding-top: 10px;
     display: block;
 }
 
+#box {
+    color: red;
+    font-style: italic;
+}
+
 .audio {
-    margin-top: 8vh;
+    margin-top: 6vh;
 }
 audio {
     width: 200px;
