@@ -45,8 +45,8 @@ const makeGrid = e => { // add the desired amount of rows and cells to the table
 
 	for (let i = 0; i < cell.length; i++) { // add the following eventListeners to all the cells
 		cell[i].addEventListener('mousedown', e => { // when holding mouse click, enable drag option and color the clicked cell
-			drag = true;
 			console.log('mousedown');
+			drag = true;
 			dye(e);
 		});
 		cell[i].addEventListener('mouseup', _ => { // when releasing the mouse click, disable the drag option
@@ -76,6 +76,9 @@ create.addEventListener('submit', makeGrid); // create the grid when submitting 
 clear.addEventListener('click', clearGrid); // clear the grid (cleanse colored cells)
 table.addEventListener('mouseleave', _ => { // hover outside the grid will cancel the drag option
 	drag = false;
+});
+table.addEventListener('contextmenu', e => { // cancels right click default behavior for the grid (no context menu)
+	e.preventDefault();
 });
 border.addEventListener('change', _ => { // Toggle the visibility of the cells borders
 	if (border.checked) {
