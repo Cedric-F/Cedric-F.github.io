@@ -93,6 +93,11 @@ audio {
     width: 200px;
 }
 
+.hidden-audio {
+    visibility: hidden;
+    z-index: 100;
+}
+
 /* Grid */
 
 table {
