@@ -3,7 +3,7 @@
 
 /* Variables */
 
-let height, width, row, col, color;
+let height, width, row, color;
 let drag = false;
 let eraser = document.getElementById('eraser');
 let border = document.getElementById('borders')
@@ -34,12 +34,10 @@ const makeGrid = e => { // add the desired amount of rows and cells to the table
 	width = document.getElementById('input_width').value;
 
 	for (let i = 0; i < height; i++) {
-		row = document.createElement('tr');
+		row = table.insertRow(i);
 		for (let j = 0; j < width; j++) {
-			col = document.createElement('td');
-			row.appendChild(col);
+			row.insertCell(j);
 		}
-		table.appendChild(row);
 	}
 
 	document.getElementById('box').style.visibility = "visible";
@@ -47,6 +45,7 @@ const makeGrid = e => { // add the desired amount of rows and cells to the table
 	for (let i = 0; i < cell.length; i++) { // add the following eventListeners to all the cells
 		cell[i].addEventListener('mousedown', e => { // when holding mouse click, enable drag option and color the clicked cell
 			console.log('mousedown');
+			e.preventDefault();
 			drag = true;
 			dye(e);
 		});
