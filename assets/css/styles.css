@@ -82,7 +82,6 @@ input:hover, #clear:hover {
 }
 
 #box {
-    color: red;
     font-style: italic;
 }
 
@@ -116,4 +115,8 @@ td {
 td {
     width: 7px;
     height: 7px;
+}
+
+.border {
+    border: none;
 }

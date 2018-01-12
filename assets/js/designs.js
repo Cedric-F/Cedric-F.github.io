@@ -82,8 +82,12 @@ table.addEventListener('contextmenu', e => { // cancels right click default beha
 });
 border.addEventListener('change', _ => { // Toggle the visibility of the cells borders
 	if (border.checked) {
-		toggleBorders.innerHTML = "Disable";
-	} else {
 		toggleBorders.innerHTML = "Enable";
+		[].map.call(document.querySelectorAll('tr'), e => e.classList.toggle('border'));
+		[].map.call(document.querySelectorAll('td'), e => e.classList.toggle('border'));
+	} else {
+		toggleBorders.innerHTML = "Disable";
+		[].map.call(document.querySelectorAll('tr'), e => e.classList.remove('border'));
+		[].map.call(document.querySelectorAll('td'), e => e.classList.remove('border'));
 	}
 });
