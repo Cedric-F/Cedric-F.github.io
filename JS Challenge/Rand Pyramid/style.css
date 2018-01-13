@@ -4,7 +4,6 @@ html, body {
 }
 
 div {
-	width: 50%;
 	margin: auto;
 	padding: 20px 0;
 	text-align: center;
@@ -17,4 +16,8 @@ form {
 li {
 	list-style: none;
 	letter-spacing: 0.5em;
+}
+
+ul {
+	padding: 0;
 }
