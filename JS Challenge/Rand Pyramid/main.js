@@ -12,7 +12,7 @@ const makeArray = e => {
 	for (let i = 1; i <= rows; i++) {
 		line.push([... Array(i)]); // add array of index i and i empty elements
 	}
-	return add(line.map(e => e.map((e, i) => e = Math.floor(Math.random() * (9-1)+1)))); // assign a random value (from 1 to 9) to each sub element
+	return add(line.map(e => e.map((e, i) => e = Math.floor(Math.random() * (10-1)+1)))); // assign a random value (from 1 to 9) to each sub element
 }
 
 const add = n => {
