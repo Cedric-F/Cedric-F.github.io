@@ -1,0 +1,19 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	width: 50%;
+	margin: auto;
+	padding: 20px 0;
+	text-align: center;
+}
+
+form {
+	text-align: center;
+}
+
+li {
+	list-style: none;
+}
