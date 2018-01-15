@@ -2,6 +2,8 @@
 ## A Udacity Project
 ### By Cedric F
 
+[Live Version](https://cedric-f.github.io/)
+
 ---
 
 - *Minimum requirements:*
@@ -19,7 +21,7 @@
 - *Add-ons:*
   - [X] Click and Drag to draw
   - [X] Eraser
-  - [ ] No-border option
+  - [X] No-border option
   - [X] Grid cleansing button
   - [X] Unique design
   - [X] Themed ambient sound
