@@ -29,7 +29,7 @@ const dye = e => { // colors the cells. if the eraser option is checked, cleanse
 const makeGrid = e => { // add the desired amount of rows and cells to the table.
 	e.preventDefault();
 	fusrohdah.play();
-    table.innerHTML = ""; // empty the table content
+	table.innerHTML = ""; // empty the table content
 	height = document.getElementById('input_height').value;
 	width = document.getElementById('input_width').value;
 
