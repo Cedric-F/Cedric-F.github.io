@@ -11,7 +11,7 @@
 
 main {
 	width: 500px;
-	height: 905px;
+	height: 930px;
 	border: 1px solid black;
 	background: url(../img/scroll.jpg);
 	text-align: center;
@@ -20,10 +20,10 @@ main {
 
 h1 {
 	margin: 25px auto;
-	font-size: 48px;
-  border: 7px solid transparent;
-  border-image: url("../img/border.png") 20;
 	width: 90%;
+  border: 7px solid transparent;
+  border-image: url("../img/border2.png") 25;
+	font-size: 48px;
 }
 
 img {
@@ -34,29 +34,19 @@ img {
 section {
 	margin: 20px auto;
 	padding: 15px 0;
-  border: 7px solid transparent;
-  border-image: url("../img/border.png") 20;
 	width: 450px;
+  border: 7px solid transparent;
+  border-image: url("../img/border2.png") 25;
 	font-size: 22px;
+	line-height: initial;
 }
 
-#it {
+em {
 	font-size: 20px;
-	font-style: italic;
 }
 
 ul {
-	padding: 15px 30px;
+	padding: 20px 30px;
 	list-style: none;
 	text-align: left;
-}
-
-span {
-	font-weight: bold;
-}
-
-hr {
-	margin: auto;
-	width: 40%;
-	border-color: #49192177;
 }
