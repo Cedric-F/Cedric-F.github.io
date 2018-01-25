@@ -9,13 +9,18 @@
 	font-family: Cyrodiil;
 }
 
+body {
+	background: url('../img/scroll1.jpg');
+}
+
 main {
+	margin: 0 auto;
 	padding: 25px;
 	width: 475px;
 	border: 1px solid black;
 	background: url("../img/scroll.jpg");
 	text-align: center;
-	text-shadow: 1px 1px 1px #ffff;
+	text-shadow: 1px 1px 1px #fffc;
 	line-height: 1.375;
 }
 
@@ -34,14 +39,10 @@ img {
 
 section {
 	margin: 0 auto;
-	padding: 15px;
+	padding: 15px 20px;
   border: 7px solid transparent;
   border-image: url("../img/border2.png") 25;
-	font-size: 20px;
-}
-
-em {
-	font-size: 18px;
+	font-size: 22px;
 }
 
 ul {
