@@ -12,11 +12,11 @@
 main {
 	padding: 25px 0;
 	width: 500px;
-	height: 880px;
+	height: 840px;
 	border: 1px solid black;
 	background: url(../img/scroll.jpg);
 	text-align: center;
-	text-shadow: 1px 1px 1px #fff9;
+	text-shadow: 1px 1px 1px #ffff;
 }
 
 h1 {
@@ -39,12 +39,12 @@ section {
 	width: 450px;
   border: 7px solid transparent;
   border-image: url("../img/border2.png") 25;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: initial;
 }
 
 em {
-	font-size: 20px;
+	font-size: 18px;
 }
 
 ul {
