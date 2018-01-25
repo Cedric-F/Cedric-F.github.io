@@ -10,11 +10,10 @@
 }
 
 main {
-	padding: 25px 0;
-	width: 500px;
-	height: 840px;
+	padding: 25px;
+	width: 475px;
 	border: 1px solid black;
-	background: url(../img/scroll.jpg);
+	background: url("../img/scroll.jpg");
 	text-align: center;
 	text-shadow: 1px 1px 1px #ffff;
 	line-height: 1.375;
@@ -22,8 +21,6 @@ main {
 
 h1 {
 	margin: 0 auto;
-	margin-bottom: 25px;
-	width: 90%;
   border: 7px solid transparent;
   border-image: url("../img/border2.png") 25;
 	font-size: 48px;
@@ -32,12 +29,12 @@ h1 {
 img {
 	width: 300px;
 	height: 300px;
+  margin: 25px 0;
 }
 
 section {
-	margin: 20px auto;
-	padding: 15px 0;
-	width: 450px;
+	margin: 0 auto;
+	padding: 15px;
   border: 7px solid transparent;
   border-image: url("../img/border2.png") 25;
 	font-size: 20px;
@@ -48,7 +45,7 @@ em {
 }
 
 ul {
-	padding: 20px 30px;
+	padding: 20px 15px;
 	list-style: none;
 	text-align: left;
 }
