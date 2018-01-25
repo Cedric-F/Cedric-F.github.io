@@ -25,6 +25,7 @@ const add = n => {
 
 	document.getElementById('sort').appendChild(makeUl(n)); // creates the list
 	arr.innerHTML = `The solution is ${total}`;
+	console.log(`The solution is ${total}`);
 }
 
 const makeUl = n => {
