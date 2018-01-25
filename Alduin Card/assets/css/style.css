@@ -10,8 +10,9 @@
 }
 
 main {
+	padding: 25px 0;
 	width: 500px;
-	height: 930px;
+	height: 880px;
 	border: 1px solid black;
 	background: url(../img/scroll.jpg);
 	text-align: center;
@@ -19,7 +20,8 @@ main {
 }
 
 h1 {
-	margin: 25px auto;
+	margin: 0 auto;
+	margin-bottom: 25px;
 	width: 90%;
   border: 7px solid transparent;
   border-image: url("../img/border2.png") 25;
