@@ -17,6 +17,7 @@ main {
 	background: url(../img/scroll.jpg);
 	text-align: center;
 	text-shadow: 1px 1px 1px #ffff;
+	line-height: 1.375;
 }
 
 h1 {
@@ -40,7 +41,6 @@ section {
   border: 7px solid transparent;
   border-image: url("../img/border2.png") 25;
 	font-size: 20px;
-	line-height: initial;
 }
 
 em {
