@@ -41,6 +41,8 @@ const makeGrid = e => { // add the desired amount of rows and cells to the table
 	}
 
 	document.getElementById('box').style.visibility = "visible";
+  toggleBorders.innerHTML = "Disable";
+  border.checked = false;
 
 	for (let i = 0; i < cell.length; i++) { // add the following eventListeners to all the cells
 		cell[i].addEventListener('mousedown', e => { // when holding mouse click, enable drag option and color the clicked cell
