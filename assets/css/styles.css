@@ -110,6 +110,7 @@ tr,
 td {
     border: 1px solid black;
     outline: none;
+    box-sizing: border-box;
 }
 
 td {
