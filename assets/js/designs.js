@@ -3,7 +3,7 @@
 
 /* Variables */
 
-let row, color,
+let color,
     drag = false;
 
 const clear = document.getElementById('clear'),
@@ -20,14 +20,10 @@ const clear = document.getElementById('clear'),
 
 /* Functions */
 
-const dye = e => { // colors the cells. if the eraser option is checked, cleanse them instead
-  if (!eraser.checked) {
-    color = colorPicker.value;
-    e.target.style.backgroundColor = color;
-  } else {
-    e.target.removeAttribute('style');
-  }
-},
+const dye = e => // colors the cells. if the eraser option is checked, cleanse them instead
+  (!eraser.checked) ?
+  e.target.style.backgroundColor = colorPicker.value :
+  e.target.removeAttribute('style'),
 
 makeGrid = e => { // add the desired amount of rows and cells to the table.
   e.preventDefault();
@@ -35,7 +31,7 @@ makeGrid = e => { // add the desired amount of rows and cells to the table.
   table.innerHTML = ""; // empty the table content
 
   for (let i = 0; i < height.value; i++) {
-    row = table.insertRow(i);
+    let row = table.insertRow(i);
     for (let j = 0; j < width.value; j++) {
       row.insertCell(j);
     }
@@ -65,22 +61,15 @@ makeGrid = e => { // add the desired amount of rows and cells to the table.
   });
 },
 
-clearGrid = _ => { // Navigate through each cell to cleanse the colored ones
-  Array.prototype.map.call(cell, e => {
-    if (e.hasAttribute('style')) e.removeAttribute('style');
-  });
-};
+clearGrid = _ => Array.prototype.map.call(cell, e => (e.hasAttribute('style')) ? e.removeAttribute('style') : e);
+// Navigate through each cell to cleanse the colored ones
 
 /* Global event listeners */
 
 create.addEventListener('submit', makeGrid); // create the grid when submitting the form
 clear.addEventListener('click', clearGrid); // clear the grid (cleanse colored cells)
-table.addEventListener('mouseleave', _ => { // hover outside the grid will cancel the drag option
-  drag = false;
-});
-table.addEventListener('contextmenu', e => { // cancels right click default behavior for the grid (no context menu)
-  e.preventDefault();
-});
+table.addEventListener('mouseleave', _ => drag = false); // hover outside the grid will cancel the drag option
+table.addEventListener('contextmenu', e => e.preventDefault()); // cancels right click default behavior for the grid (no context menu)
 border.addEventListener('change', _ => { // Toggle the visibility of the cells borders
   if (border.checked) {
     toggleBorders.innerHTML = "Enable";
