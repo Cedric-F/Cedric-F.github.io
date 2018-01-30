@@ -3,17 +3,18 @@
 
 /* Variables */
 
-let height, width, row, color;
-let drag = false;
-let eraser = document.getElementById('eraser');
-let border = document.getElementById('borders')
-let toggleBorders = document.getElementById('toggle-borders')
-const create = document.getElementById('creation-form');
-const clear = document.getElementById('clear');
-const table = document.getElementById('pixel_canvas');
-const colorPicker = document.getElementById('colorPicker');
-const cell = document.getElementsByTagName('td');
-const audio = document.getElementById('fusrohdah');
+let height, width, row, color,
+    drag = false,
+    eraser = document.getElementById('eraser'),
+    border = document.getElementById('borders'),
+    toggleBorders = document.getElementById('toggle-borders');
+
+const create = document.getElementById('creation-form'),
+      clear = document.getElementById('clear'),
+      table = document.getElementById('pixel_canvas'),
+      colorPicker = document.getElementById('colorPicker'),
+      cell = document.getElementsByTagName('td'),
+      audio = document.getElementById('fusrohdah');
 
 /* Functions */
 
@@ -24,9 +25,9 @@ const dye = e => { // colors the cells. if the eraser option is checked, cleanse
   } else {
     e.target.removeAttribute('style');
   }
-};
+},
 
-const makeGrid = e => { // add the desired amount of rows and cells to the table.
+makeGrid = e => { // add the desired amount of rows and cells to the table.
   e.preventDefault();
   fusrohdah.play();
   table.innerHTML = ""; // empty the table content
@@ -62,9 +63,9 @@ const makeGrid = e => { // add the desired amount of rows and cells to the table
       }
     });
   }
-};
+},
 
-const clearGrid = _ => { // Navigate through each cell to cleanse the colored ones
+clearGrid = _ => { // Navigate through each cell to cleanse the colored ones
   for (let i = 0; i < cell.length; i++) {
     if (cell[i].hasAttribute('style')) {
       cell[i].removeAttribute('style');
