@@ -9,9 +9,9 @@
   <aside>
     <h2>Dimensions</h2>
 
-    <form id="creation-form">
-      <label for="input_height" class="labels">Height:</label><input type="range" id="input_height" name="height" min="1" max="50" value="15">
-      <label for="input_width" class="labels">Width:</label><input type="range" id="input_width" name="width" min="1" max="100" value="15">
+    <form id="create">
+      <label for="height" class="labels">Height:</label><input type="range" id="height" name="height" min="1" max="50" value="15">
+      <label for="width" class="labels">Width:</label><input type="range" id="width" name="width" min="1" max="100" value="15">
       <input type="submit" value="Create">
     </form>
 
@@ -19,7 +19,7 @@
 
     <h2 class="labels">Color</h2>
 
-    <input type="color" id="colorPicker">
+    <input type="color" id="color">
 
     <label for="eraser" class="box">Eraser:<input type="checkbox" id="eraser"></label>
     <label for="borders" class="box" id="box" style="visibility: hidden;"><span id="toggle-borders">Disable</span> borders:<input type="checkbox" id="borders"></label>
@@ -38,9 +38,9 @@
     
     <h3>Design Canvas</h3>
 
-    <table id="pixel_canvas"></table>
+    <table id="canvas"></table>
     <div class="hidden-audio">
-      <audio controls id="fusrohdah">
+      <audio controls id="shout">
         <source src="assets/audio/FusRohDah.mp3" type="audio/mpeg" />
         <source src="assets/audio/FusRohDah.ogg" type="audio/ogg" />      
       </audio>
