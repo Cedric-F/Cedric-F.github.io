@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pixel Art Maker</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="shortcut icon" href="assets/img/Favicon.ico">
+  <title>Pixel Art Maker</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="shortcut icon" href="assets/img/Favicon.ico">
 </head>
 <body>
-    <aside>
-        <h2>Dimensions</h2>
+  <aside>
+    <h2>Dimensions</h2>
 
-        <form id="creation-form">
-            <label for="input_height" class="labels">Height:</label><input type="range" id="input_height" name="height" min="1" max="50" value="15">
-            <label for="input_width" class="labels">Width:</label><input type="range" id="input_width" name="width" min="1" max="100" value="15">
-            <input type="submit" value="Create">
-        </form>
+    <form id="creation-form">
+      <label for="input_height" class="labels">Height:</label><input type="range" id="input_height" name="height" min="1" max="50" value="15">
+      <label for="input_width" class="labels">Width:</label><input type="range" id="input_width" name="width" min="1" max="100" value="15">
+      <input type="submit" value="Create">
+    </form>
 
-        <button id="clear">Clear</button>
+    <button id="clear">Clear</button>
 
-        <h2 class="labels">Color</h2>
+    <h2 class="labels">Color</h2>
 
-        <input type="color" id="colorPicker">
+    <input type="color" id="colorPicker">
 
-        <label for="eraser" class="box">Eraser:<input type="checkbox" id="eraser"></label>
-        <label for="borders" class="box" id="box" style="visibility: hidden;"><span id="toggle-borders">Disable</span> borders:<input type="checkbox" id="borders"></label>
-        
-        <div class="audio">
-            <h3>Skyrim Ambient Music</h3>
-            <audio controls>
-                <source src="assets/audio/Skyrim-Night.mp3" type="audio/mpeg" />
-                <source src="assets/audio/Skyrim-Night.ogg" type="audio/ogg" />
-            </audio>
-        </div>
-    </aside>
-
-    <main>
-        <h1>Drem yol lok<br><span class="greets">Dovahkiin</span></h1>
-        
-        <h3>Design Canvas</h3>
-
-        <table id="pixel_canvas"></table>
-        <div class="hidden-audio">
-            <audio controls id="fusrohdah">
-                <source src="assets/audio/FusRohDah.mp3" type="audio/mpeg" />
-                <source src="assets/audio/FusRohDah.ogg" type="audio/ogg" />            
-            </audio>
-        </div>
-    </main>
-
-
+    <label for="eraser" class="box">Eraser:<input type="checkbox" id="eraser"></label>
+    <label for="borders" class="box" id="box" style="visibility: hidden;"><span id="toggle-borders">Disable</span> borders:<input type="checkbox" id="borders"></label>
     
-    <script src="assets/js/designs.js"></script>
+    <div class="audio">
+      <h3>Skyrim Ambient Music</h3>
+      <audio controls>
+        <source src="assets/audio/Skyrim-Night.mp3" type="audio/mpeg" />
+        <source src="assets/audio/Skyrim-Night.ogg" type="audio/ogg" />
+      </audio>
+    </div>
+  </aside>
+
+  <main>
+    <h1>Drem yol lok<br><span class="greets">Dovahkiin</span></h1>
+    
+    <h3>Design Canvas</h3>
+
+    <table id="pixel_canvas"></table>
+    <div class="hidden-audio">
+      <audio controls id="fusrohdah">
+        <source src="assets/audio/FusRohDah.mp3" type="audio/mpeg" />
+        <source src="assets/audio/FusRohDah.ogg" type="audio/ogg" />      
+      </audio>
+    </div>
+  </main>
+
+
+  
+  <script src="assets/js/designs.js"></script>
 </body>
 </html>
