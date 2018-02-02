@@ -22,12 +22,12 @@ const clear = document.getElementById('clear'),
 const dye = e =>
   !eraser.checked ?
   e.target.style.backgroundColor = color.value :
-  e.target.removeAttribute('style'),
+  e.target.removeAttribute('style');
 
-clearGrid = _ => cells.map(e => e.hasAttribute('style') ? e.removeAttribute('style') : e),
+const clearGrid = _ => cells.map(e => e.hasAttribute('style') ? e.removeAttribute('style') : e);
 // Navigate through each cell to cleanse the colored ones
 
-makeGrid = e => { // Create the table
+const makeGrid = e => { // Create the table
   e.preventDefault();
   shout.play();
   table.innerHTML = ""; // empty the table content
