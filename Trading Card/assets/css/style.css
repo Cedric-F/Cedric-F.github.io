@@ -14,7 +14,7 @@ body {
   cursor: url(../cursor/skyrim.cur), default !important;
 }
 
-main {
+.card {
   margin: 0 auto;
   padding: 25px;
   width: 475px;
@@ -25,20 +25,20 @@ main {
   background: url(../img/scroll.jpg);
 }
 
-h1 {
+.name {
   margin: 0 auto;
   font-size: 3em;
   border: 7px solid transparent;
   border-image: url(../img/border.png) 25;
 }
 
-img {
+.alduin {
   width: 300px;
   height: 300px;
   margin: 25px 0;
 }
 
-section {
+.bottom {
   padding: 20px;
   margin: 0 auto;
   font-size: 22px;
@@ -46,7 +46,7 @@ section {
   border-image: url(../img/border.png) 25;
 }
 
-ul {
+.info {
   padding: 20px;
   list-style: none;
   text-align: left;
