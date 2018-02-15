@@ -1,0 +1,1 @@
+[Favicon](https://skyrim.gamepedia.com/File:Favicon.ico)
