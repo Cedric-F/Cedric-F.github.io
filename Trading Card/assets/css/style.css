@@ -1,17 +1,17 @@
 @font-face {
-    font-family: 'Cyrodiil';
-    src: url('../fonts/Cyrodiil.ttf') format('truetype');
+    font-family: "Cyrodiil";
+    src: url(../fonts/Cyrodiil.ttf) format("truetype");
 }
 
 * {
   padding: 0;
   margin: 0;
-  font-family: 'Cyrodiil', 'Garamond';
+  font-family: "Cyrodiil", "Garamond";
 }
 
 body {
-  background: url('../img/bg.png');
-  cursor: url('../cursor/skyrim.cur'), default !important;
+  background: url(../img/bg.png);
+  cursor: url(../cursor/skyrim.cur), default !important;
 }
 
 main {
@@ -22,14 +22,14 @@ main {
   line-height: 1.375;
   text-align: center;
   text-shadow: 1px 1px 1px #fffc;
-  background: url('../img/scroll.jpg');
+  background: url(../img/scroll.jpg);
 }
 
 h1 {
   margin: 0 auto;
   font-size: 3em;
   border: 7px solid transparent;
-  border-image: url('../img/border.png') 25;
+  border-image: url(../img/border.png) 25;
 }
 
 img {
@@ -43,7 +43,7 @@ section {
   margin: 0 auto;
   font-size: 22px;
   border: 7px solid transparent;
-  border-image: url('../img/border.png') 25;
+  border-image: url(../img/border.png) 25;
 }
 
 ul {
