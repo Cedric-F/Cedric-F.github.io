@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'Cyrodiil';
+  src: url(../fonts/Cyrodiil.ttf) format('truetype');
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  font-family: 'Cyrodiil';
+  font-size: 24px;
+  text-align: center;
+  background: url('../img/swp.jpg') fixed no-repeat;
+  cursor: url('../cursor/skyrim.cur'), default !important;
+}
+
+main {
+  margin: 0 auto;
+  grid-column: 2/9;
+}
+
+/* Aside */
+
+aside {
+  margin: 0 20px;
+  padding: 0 20px;
+  height: 100%;
+  grid-column: 1/2;
+  color: #EBEDEC;
+  background-color: #0008;
+  border-left: 2px inset white;
+  border-right: 2px outset white;
+}
+
+h1 {
+  line-height: 0.75em;
+}
+
+.greets {
+  font-size: 30px;
+}
+
+input[type=range] {
+  width: 100%;
+}
+
+input[type=submit], #clear {
+  width: 75px;
+  height: 35px;
+  margin-bottom: 10px;
+  color: #EBEDEC;
+  background-color: transparent;
+  border: 2px solid #EBEDEC;
+  font-family: inherit;
+  font-size: 0.75em;
+}
+
+input:focus, #clear:focus {
+  outline-width: 0;
+}
+input:hover, #clear:hover {
+  cursor: url('../cursor/skyrim-hand.cur'), pointer !important;
+}
+
+.labels {
+  display: block;
+  transition: background 0.5s;
+}
+
+.labels:hover {
+  background: #fff4;
+  cursor: url('../cursor/skyrim-text.cur'), text !important;
+}
+
+.box {
+  padding-top: 10px;
+  display: block;
+}
+
+#box {
+  font-style: italic;
+}
+
+.audio {
+  margin-top: 6vh;
+}
+audio {
+  width: 200px;
+}
+
+.hidden-audio {
+  visibility: hidden;
+  z-index: 100;
+}
+
+/* Grid */
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: #fff6;
+}
+
+table,
+tr,
+td {
+  border: 1px solid black;
+  outline: none;
+  box-sizing: border-box;
+}
+
+td {
+  width: 7px;
+  height: 7px;
+}
+
+.border {
+  border: none;
+}
