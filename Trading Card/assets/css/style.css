@@ -51,3 +51,7 @@ ul {
 	list-style: none;
 	text-align: left;
 }
+
+.fact {
+	font-style: italic;
+}
