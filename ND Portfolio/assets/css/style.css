@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fafbfc;
+  font-family: Ubuntu;
+}
+
+.wrap {
+  margin: 0 auto;
+  min-width: 300px;
+  max-width: 900px;
+}
+
+header {
+  padding: 5px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 75px;
+  color: #00b2d7;
+  text-align: right;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 40px 6px rgba(0,0,0,0.4); 
+  box-shadow: 0px 0px 40px 6px rgba(0,0,0,0.4);
+}
+
+#cf-logo {
+  width: 60px;
+}
+
+#titles > h1 {
+  font-size: 1.3em;
+}
+
+h1, h3 {
+  font-weight: 400;
+}
+
+h1 {
+  color: #122759;
+}
+
+main {
+  margin: 25px auto;
+  width: 100%;
+}
+
+#top-bg {
+  width: 100%;
+}
+
+#work h1 {
+  margin-left: 25px;
+}
+
+#projects {
+  margin: 0 auto;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.preview {
+  margin: 5px auto;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
+  max-width: 900px;
+  width: 100%;
+  background-color: #fff;
+  color: #00b2d7;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 40px 10px rgba(0,0,0,0.4); 
+  box-shadow: 0px 0px 40px 10px rgba(0,0,0,0.4);
+}
