@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
 
 * {
   padding: 0;
@@ -8,7 +8,7 @@
 
 body {
   background-color: #fafbfc;
-  font-family: Ubuntu;
+  font-family: "Ubuntu", "Gararmond";
 }
 
 .wrap {
