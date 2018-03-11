@@ -15,19 +15,19 @@ body {
   margin: 0 auto;
   min-width: 300px;
   max-width: 900px;
+  display: grid;
+  grid-auto-rows: 75px 1fr 75px;
 }
 
 header {
-  padding: 5px 25px;
+  padding: 5px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 75px;
-  color: #00b2d7;
   text-align: right;
   background-color: #fff;
-  -webkit-box-shadow: 0px 0px 40px 6px rgba(0,0,0,0.4); 
-  box-shadow: 0px 0px 40px 6px rgba(0,0,0,0.4);
+  box-shadow: 0 5px 10px -7px #000;
 }
 
 #cf-logo {
@@ -38,12 +38,20 @@ header {
   font-size: 1.3em;
 }
 
-h1, h3 {
+h1,
+h3 {
   font-weight: 400;
 }
 
-h1 {
+h1,
+figcaption {
   color: #122759;
+}
+
+header,
+span,
+footer {
+  color: #00b2d7;
 }
 
 main {
@@ -63,11 +71,16 @@ main {
   margin: 0 auto;
   max-width: 900px;
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .preview {
-  margin: 5px auto;
+  margin: 10px auto;
+}
+
+figcaption {
+  text-align: center;
 }
 
 footer {
@@ -78,19 +91,11 @@ footer {
   max-width: 900px;
   width: 100%;
   background-color: #fff;
-  color: #00b2d7;
   text-align: center;
-  -webkit-box-shadow: 0px 0px 40px 10px rgba(0,0,0,0.4); 
-  box-shadow: 0px 0px 40px 10px rgba(0,0,0,0.4);
+  box-shadow: 0px -5px 10px -7px #000;
 }
 
-@media screen and (min-width: 775px) and (max-width: 875px) {
-  .preview {
-    width: 30%;
-  }
-}
-
-@media screen and (max-width: 775px) {
+@media screen and (max-width: 600px) {
   #projects {
     flex-wrap: nowrap;
     flex-direction: column;
