@@ -96,6 +96,7 @@ footer {
 }
 
 @media screen and (max-width: 600px) {
+  // Avoids the figures to touch each other before they collapse.
   #projects {
     flex-wrap: nowrap;
     flex-direction: column;
