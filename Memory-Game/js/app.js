@@ -1,10 +1,11 @@
 const deck = document.querySelector('.deck'), // Grab the deck
       modal = document.querySelector('#modal'),
       moves = document.querySelector('.moves'), // Moves counter
+      totalMoves = document.querySelector('#total-moves'),
       reset = document.querySelector('.restart'), // Restart button
       cards = document.querySelectorAll('.deck .card'); // Node list containing the cards
-let one, two, // 2 card holders used to compare them
-		match;
+let one, two, // 2 card holders used the selected elements
+		match = 0;
 
 /*
 The deck is sorted by a Grid layout system.
@@ -30,7 +31,12 @@ const compare = (a, b) => {
   [one, two] = [0, 0]; // reset the card holder
   setTimeout(_ => {
     (a.innerHTML === b.innerHTML) ?
-      [a.classList.add('match'), b.classList.add('match'), match = document.querySelectorAll('.match')] : // keep the cards visible
+      [a.classList.add('match'),
+      b.classList.add('match'),
+      ++match == cards.length/2 ?
+        [modal.style.display = 'block',
+        totalMoves.textContent = moves.textContent] :
+        0] :
       [a.classList.remove('open', 'show'), b.classList.remove('open', 'show')]; // flip back the cards
 
     setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
