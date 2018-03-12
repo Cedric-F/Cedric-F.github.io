@@ -1,17 +1,60 @@
+const deck = document.querySelector('.deck'), // Grab the deck
+      modal = document.querySelector('#modal'),
+      moves = document.querySelector('.moves'), // Moves counter
+      reset = document.querySelector('.restart'), // Restart button
+      cards = document.querySelectorAll('.deck .card'); // Node list containing the cards
+let one, two, // 2 card holders used to compare them
+		match;
+
 /*
- * Create a list that holds all of your cards
- */
+The deck is sorted by a Grid layout system.
+We can easily swap the cards position by changing their order property
+*/
+const shuffle = _ => {
+  [one, two] = [0, 0]; // reset the card holder
+  deck.addEventListener('pointerdown', flip);
+  let index, order = [...Array(cards.length).keys()]; // Make a list of values from [0 → amount of cards[
+  for (card of cards) { // Loop over the cards
+    card.classList.remove('open', 'show', 'match'); // Flip the card back.
+    card.removeAttribute('style'); // Prevents the card from staying red (if the user reset right after a wrong guess)
+    index = order[Math.floor(Math.random() * order.length)]; // Grab a random value in our order list.
+    order.splice(order.indexOf(index), 1); // Remove this value from the list to avoid duplicates.
+    card.style.order = index; // Change the position of the card.
+  };
+  moves.textContent = 0; // Reset the moves count.
+}
 
+const compare = (a, b) => {
+  deck.removeEventListener('pointerdown', flip); // temporary disable the flip function
+  moves.textContent++;
+  [one, two] = [0, 0]; // reset the card holder
+  setTimeout(_ => {
+    (a.innerHTML === b.innerHTML) ?
+      [a.classList.add('match'), b.classList.add('match'), match = document.querySelectorAll('.match')] : // keep the cards visible
+      [a.classList.remove('open', 'show'), b.classList.remove('open', 'show')]; // flip back the cards
+
+    setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
+  }, 500);
+}
+
+const flip = e => {
+  card = e.target;
+  if (card.classList.contains('card')) { // If the clicked element has the "card" class then :
+    if (!(card.classList.contains('open', 'show'))) { // check if it is visible. If not, then :
+      card.classList.add('open', 'show'); // make it visible
+      one ? two ? 0 : two = card : one = card;
+      if (one && two) compare(one, two);
+    }
+  }
+}
+
+reset.addEventListener('pointerdown', shuffle);
+window.onload = shuffle;
 
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+Shuffle function from http://stackoverflow.com/a/2450976
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
+function ugly-shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -24,15 +67,4 @@ function shuffle(array) {
 
     return array;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+*/
