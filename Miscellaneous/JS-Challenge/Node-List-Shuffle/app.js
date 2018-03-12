@@ -26,12 +26,12 @@ container.appendChild(frag); // Insert the fragment in the container.
 const shuffle = _ => {
   let divs = container.querySelectorAll('div') // Make a Node List out of the divs in the container
   let order = [... Array(5).keys()]; // Make an array of 5 elements and assign them their index value → [0,1,2,3,4]
-  Array.prototype.forEach.call(divs, (e, i, a) => { // Treat the Node List as like an array, and for each element:
+  for (div of divs) { // Treat the Node List as like an array, and for each element:
     let index = order[Math.floor(Math.random() * order.length)] // Generate a random index taken from the order array
     console.log(order, index)
     order.splice(order.indexOf(index), 1); // Remove the value from the order array to avoid duplicates
-    a[i].style.order = index; // change the order attribute of the div.
-  });
+    div.style.order = index; // change the order attribute of the div.
+  };
 };
 
 shuffleButton.addEventListener('click', shuffle)
