@@ -18,6 +18,7 @@ The deck is sorted by a Grid layout system.
 We can easily swap the cards position by changing their order property
 */
 const shuffle = _ => {
+  for (let i = 0; i < stars.length; i++) stars[i].style.color = null;
   [one, two] = [0, 0]; // reset the card holder
   deck.addEventListener('pointerdown', flip);
   let index, order = [...Array(cards.length).keys()]; // Make a list of values from [0 → amount of cards[
@@ -39,7 +40,6 @@ const openModal = _ => {
 }
 const closeModal = _ => {
   modal.style.display = 'none';
-  for (let i = 0; i < stars.length; i++) stars[i].style.color = null;
 }
 
 const compare = (a, b) => {
