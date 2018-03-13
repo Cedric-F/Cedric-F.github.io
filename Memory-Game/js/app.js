@@ -1,5 +1,4 @@
 const deck = document.querySelector('.deck'), // Grab the deck
-      modal = document.querySelector('#modal'),
       close = document.querySelector('.close'),
       moves = document.querySelector('.moves'), // Moves counter
       reset = document.querySelectorAll('.restart'), // Restart button
@@ -10,15 +9,30 @@ const deck = document.querySelector('.deck'), // Grab the deck
       rating = document.querySelector('.stars'),
       stars = document.querySelectorAll('.fa-star');
 let one, two, // 2 card holders used the selected elements
-		match = 0,
+		match,
     start, end;
+
+const modal = {
+  div: document.querySelector('#modal'),
+  open: _ => {
+    modal.div.style.display = 'block';
+    totalMoves.textContent = moves.textContent;
+    endMessage.textContent = moves.innerHTML == 24 ? 'You lose!' : 'You win!';
+    result.appendChild(rating.cloneNode(true));
+  },
+  close: _ => {
+    modal.div.style.display = 'none';
+    result.innerHTML = '';
+  }
+}
 
 /*
 The deck is sorted by a Grid layout system.
 We can easily swap the cards position by changing their order property
 */
 const shuffle = _ => {
-  for (let i = 0; i < stars.length; i++) stars[i].style.color = null;
+  match = 0;
+  for (let i = 0; i < stars.length; i++) stars[i].style.color = null; // Inline color attribtue set to nothing
   [one, two] = [0, 0]; // reset the card holder
   deck.addEventListener('pointerdown', flip);
   let index, order = [...Array(cards.length).keys()]; // Make a list of values from [0 → amount of cards[
@@ -32,35 +46,36 @@ const shuffle = _ => {
   moves.textContent = 0; // Reset the moves count.
 };
 
-const openModal = _ => {
-  modal.style.display = 'block',
-  totalMoves.appendChild(moves.cloneNode(true));
-  endMessage.textContent = moves.innerHTML == 24 ? 'You lose!' : 'You win!';
-  result.appendChild(rating.cloneNode(true));
-}
-const closeModal = _ => {
-  modal.style.display = 'none';
+const rate = _ => {
+  if (moves.textContent == 12) stars[2].style.color = 'black';
+  if (moves.textContent == 18) stars[1].style.color = 'black';
+  if (moves.textContent == 24) {
+    stars[0].style.color = 'black';
+    modal.open();
+  }
 }
 
 const compare = (a, b) => {
   deck.removeEventListener('pointerdown', flip); // temporary disable the flip function
   moves.textContent++;
-  if (moves.textContent == 12) stars[2].style.color = 'black';
-  if (moves.textContent == 18) stars[1].style.color = 'black';
-  if (moves.textContent == 24) {
-    stars[0].style.color = 'black';
-    openModal();
-    endMessage.textContent = 'You lose!';
-  }
+  rate();
   [one, two] = [0, 0]; // reset the card holder
   setTimeout(_ => {
     (a.innerHTML === b.innerHTML) ?
       [a.classList.add('match'),
       b.classList.add('match'),
-      ++match == cards.length/2 ?
-        openModal() :
+      (++match == cards.length/2) ?
+        modal.open() :
         0] :
       [a.classList.remove('open', 'show'), b.classList.remove('open', 'show')]; // flip back the cards
+    /*if (a.innerHTML === b.innerHTML) {
+      a.classList.add('match');
+      b.classList.add('match');
+      if (++match == cards.length/2) modal.open();
+    } else {
+      a.classList.remove('open', 'show');
+      b.classList.remove('open', 'show');
+    }*/
 
     setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
   }, 500);
@@ -78,8 +93,8 @@ const flip = e => {
 };
 
 reset[0].addEventListener('pointerdown', shuffle);
-reset[1].addEventListener('pointerdown', _ => [shuffle(), closeModal()]);
-close.addEventListener('pointerdown', closeModal);
+reset[1].addEventListener('pointerdown', _ => [shuffle(), modal.close()]);
+close.addEventListener('pointerdown', modal.close);
 
 
 window.onload = shuffle;
