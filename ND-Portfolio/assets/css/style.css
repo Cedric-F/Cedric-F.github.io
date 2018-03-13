@@ -59,8 +59,11 @@ main {
   width: 100%;
 }
 
-#top-bg {
-  width: 100%;
+#top-bg,
+.preview {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 #work h1 {
@@ -77,6 +80,9 @@ main {
 
 .preview {
   margin: 10px auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 figcaption {
@@ -95,8 +101,7 @@ footer {
   box-shadow: 0px -5px 10px -7px #000;
 }
 
-@media screen and (max-width: 600px) {
-  // Avoids the figures to touch each other before they collapse.
+@media screen and (max-width: 575px) {
   #projects {
     flex-wrap: nowrap;
     flex-direction: column;
