@@ -21,12 +21,11 @@ const modal = {
     totalMoves.textContent = moves.textContent;
     endMessage.textContent = moves.innerHTML == 24 ? 'You lose!' : 'You win!';
     result.appendChild(rating.cloneNode(true));
-    time.textContent = `~${Math.floor((end - start)/1000)}`;
+    time.textContent = `~${Math.floor((end - start)/1000)} seconds`;
   },
   close: _ => {
     modal.div.style.display = 'none';
     result.innerHTML = '';
-    [start, end] = [0, 0] // timer reset
   }
 }
 
@@ -35,9 +34,8 @@ The deck is sorted by a Grid layout system.
 We can easily swap the cards position by changing their order property
 */
 const shuffle = _ => {
-  match = 0;
+  [match, start, one, two] = [0,0,0,0] // safety reset
   for (let i = 0; i < stars.length; i++) stars[i].style.color = null; // Inline color attribtue set to nothing
-  [one, two] = [0, 0]; // reset the card holder
   deck.addEventListener('pointerdown', flip);
   let index, order = [...Array(cards.length).keys()]; // Make a list of values from [0 → amount of cards[
   for (card of cards) { // Loop over the cards
@@ -52,8 +50,8 @@ const shuffle = _ => {
 
 const rate = _ => {
   if (moves.textContent == 12) stars[2].style.color = 'black';
-  if (moves.textContent == 18) stars[1].style.color = 'black';
-  if (moves.textContent == 24) {
+  else if (moves.textContent == 18) stars[1].style.color = 'black';
+  else if (moves.textContent == 24) {
     stars[0].style.color = 'black';
     modal.open();
   }
