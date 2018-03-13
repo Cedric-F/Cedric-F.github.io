@@ -114,7 +114,7 @@ h1 {
 
 
 /*
- * Eng-game modal
+ * End-game modal
  */
 
 #modal {
@@ -131,13 +131,13 @@ h1 {
 }
 
 .content {
-  background-color: #f5f5f5;
   margin: 0 auto;
   padding: 20px 20px 45px;
-  border: 1px solid #888;
-  min-width: 300px;
   width: 50%;
+  min-width: 300px;
   text-align: center;
+  border: 1px solid #888;
+  background-color: #f5f5f5;
  }
 
  .content table {
@@ -167,15 +167,15 @@ button.restart {
   margin-top: 25px;
   height: 48px;
   width: 100px;
+  border: 1px #dcdcdc;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #777;
+  text-shadow: 0 1px 0 #fff;
+  box-shadow: 0 1px 0 0 #fff inset;
   background-color: #fdfeff;
   background: linear-gradient(#ededed, #d7d7d7);
-  border: 1px #dcdcdc;
-  border-radius: 6px;
-  box-shadow: 0 1px 0 0 #fff inset;
-  color: #777;
-  font-weight: bold;
-  text-shadow: 0 1px 0 #fff;
-  cursor: pointer;
 }
 
 button.restart:hover {
