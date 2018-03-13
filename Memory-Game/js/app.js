@@ -4,6 +4,7 @@ const deck = document.querySelector('.deck'), // Grab the deck
       reset = document.querySelectorAll('.restart'), // Restart button
       cards = document.querySelectorAll('.deck .card'); // Node list containing the cards
       totalMoves = document.querySelector('#total-moves'),
+      time = document.querySelector('#total-time'),
       endMessage = document.querySelector('#end-message'),
       result = document.querySelector('#result'),
       rating = document.querySelector('.stars'),
@@ -15,14 +16,17 @@ let one, two, // 2 card holders used the selected elements
 const modal = {
   div: document.querySelector('#modal'),
   open: _ => {
+    end = Date.now();
     modal.div.style.display = 'block';
     totalMoves.textContent = moves.textContent;
     endMessage.textContent = moves.innerHTML == 24 ? 'You lose!' : 'You win!';
     result.appendChild(rating.cloneNode(true));
+    time.textContent = `~${Math.floor((end - start)/1000)}`;
   },
   close: _ => {
     modal.div.style.display = 'none';
     result.innerHTML = '';
+    [start, end] = [0, 0] // timer reset
   }
 }
 
@@ -68,20 +72,13 @@ const compare = (a, b) => {
         modal.open() :
         0] :
       [a.classList.remove('open', 'show'), b.classList.remove('open', 'show')]; // flip back the cards
-    /*if (a.innerHTML === b.innerHTML) {
-      a.classList.add('match');
-      b.classList.add('match');
-      if (++match == cards.length/2) modal.open();
-    } else {
-      a.classList.remove('open', 'show');
-      b.classList.remove('open', 'show');
-    }*/
 
     setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
   }, 500);
 };
 
 const flip = e => {
+  if (!start) start = Date.now();
   card = e.target;
   if (card.classList.contains('card')) { // If the clicked element has the "card" class then :
     if (!(card.classList.contains('open', 'show'))) { // check if it is visible. If not, then :
