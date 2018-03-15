@@ -85,9 +85,15 @@ const flip = e => {
   }
 };
 
+const showResult = _ => {
+  Array.prototype.forEach.call(cards, (e, i, a) => {
+    a[i].classList.add('open', 'show', 'match');
+  })
+}
+
 reset[0].addEventListener('pointerdown', shuffle);
 reset[1].addEventListener('pointerdown', _ => [shuffle(), modal.close()]);
-close.addEventListener('pointerdown', modal.close);
+close.addEventListener('pointerdown', _ => [modal.close(), showResult()]);
 
 
 window.onload = shuffle;

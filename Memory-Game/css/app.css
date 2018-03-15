@@ -182,3 +182,20 @@ button.restart:hover {
   background: linear-gradient(#dfdfdf, #ededed);
   box-shadow: 0 1px 0 0 #fff;
 }
+
+@media screen and (max-width: 500px) {
+  div.restart {
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border: 1px #dcdcdc;
+    cursor: pointer;
+    border-radius: 6px;
+    color: #777;
+    text-shadow: 0 1px 0 #fff;
+    box-shadow: 0 1px 0 0 #fff inset;
+    background: #fdfeff;
+  }
+}
