@@ -17,7 +17,7 @@ body {
 
 body {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 250px repeat(4, 1fr);
   grid-template-rows: 1fr;
   grid-auto-rows: 100%;
   font-family: "Morpheus";
@@ -49,7 +49,6 @@ body {
   margin: 40px auto;
   width: 120px;
   height: 60px;
-  border: none;
   border-radius: 5px;
   background: linear-gradient(to bottom, #601818 0%,#601818 50%,#580606 50%,#580606 100%);
   color: #aec188;
@@ -104,7 +103,9 @@ body {
   background: url(../img/board/row.png) no-repeat center;
   background-size: 100% 170px;
   height: 170px;
-  width: 70%;
+  width: 80%;
+  min-width: 320px;
+  max-width: 680px;
   font-size: 0;
   display: flex;
   flex-direction: row;
@@ -113,7 +114,35 @@ body {
 }
 
 .row img {
+  margin: auto;
   display: block;
   width: 80px;
   height: 150px;
+}
+
+
+@media screen and (max-width: 750px) {
+  body {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .side-panel {
+    display: none;
+  }
+
+  .board {
+    grid-column: 1/5;
+  }
+
+  .row {
+    background-size: 95% 110px;
+    height: 110px;
+    width: auto;
+    max-width: 500px;
+  }
+
+  .row img {
+    width: 55px;
+    height: 100px;
+  }
 }
