@@ -16,15 +16,13 @@ body {
 }
 
 body {
-  display: grid;
-  grid-template-columns: 250px repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-auto-rows: 100%;
+  display: flex;
+  flex-direction: row;
   font-family: "Morpheus";
 }
 
 .side-panel {
-  grid-column: 1/2;
+  width: 250px;
   padding: 0 20px;
   background: url(../img/board/side_panel.png) no-repeat;
   background-size: 100% 100%;
@@ -34,10 +32,11 @@ body {
   flex-direction: column;
 }
 
-.side-panel h1 {
+.title {
   text-align: center;
   color: #330d0d;
   text-shadow: 1px 1px 3px #fff;
+  font-size: 1.5em;
 }
 
 .side-panel h2 {
@@ -101,7 +100,7 @@ body {
   background: url(../img/board/board.png) no-repeat;
   background-size: 100% 100%;
   height: 100%;
-  grid-column: 2/6;
+  width: 100%;
 }
 
 .row {
@@ -133,7 +132,6 @@ body {
   width: 75px;
   height: 75px;
   position: relative;
-  z-index: 99;
 }
 
 .count p {
@@ -143,68 +141,51 @@ body {
   font-size: 36px;
 }
 
-.shadow {
-  margin: 0 auto;
-  width: 50px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #000;
-  filter: blur(8px);
-
-  position: relative;
-  top: -50px;
-  z-index: 10;
-}
-
 @media screen and (max-width: 760px) {
   body {
     display: flex;
     flex-direction: column;
   }
 
-  .board {
-    padding-top: 90px;
-    padding-bottom: 100%;
-    margin-bottom: -100%;
+  .menu {
+    padding: 0;
+    margin: 0 auto;
+    order: 2;
+    max-width: 450px;
   }
 
-  .side-panel {
-    padding: 0;
-    order: 2;
-    background: none;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
+  .sub {
     max-width: 450px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
   }
 
-  .side-panel h1 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+  .title {
+    margin: 0 auto;
     font-size: 1.6em;
   }
 
   .shuffle-btn {
-    position: relative;
-    left: -20px;
-    order: 2;
-    width: 30%;
+    order: 1;
+    width: 110px;
+    height: 60px;
   }
 
   #shuffle {
     font-size: 1.3em;
+    margin: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .factions {
-    position: relative;
-    order: 4;
+    order: 3;
+    width: 110px;
+    height: 60px;
   }
 
   .panel-deck {
@@ -214,31 +195,31 @@ body {
     font-size: 1.3em;
     font-family: inherit;
     width: 100%;
+    height: 100%;
+    margin: 0;
   }
 
   .panel-deck span {
     display: block;
   }
 
-  .side-panel h2,
+  h2,
   .factions img {
     display: none;
   }
 
   .lives {
     width: 300px;
-    position: absolute;
-    top: 520px;
     margin: 0 auto;
-    left: 0;
-    right: 0;
-    order: 1;
   }
 
   .gems {
     margin: 0 auto;
     width: 66%;
     max-width: 450px;
+    height: 100px;
+    display: flex;
+    align-items: center;
   }
 
   .gems img {
@@ -247,16 +228,15 @@ body {
   }
 
   .moves {
-    position: relative;
-    order: 3;
-    left: 0;
-    right: 0;
-    margin: 0 -15px;
+    height: 60px;
+    width: 60px;
+    order: 2;
   }
 
   .count {
-    width: 60px;
-    height: 60px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
   }
 
   .count p {
