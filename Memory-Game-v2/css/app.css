@@ -46,7 +46,7 @@ body {
   color: #aec188;
 }
 
-#shuffle {
+#shuffle, #start {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +59,11 @@ body {
   font-size: 25px;
   font-family: inherit;
   order: 1;
+}
+
+#start {
+  margin: 0 auto;
+  order: 0;
 }
 
 button:focus,
@@ -153,13 +158,15 @@ button:active {
 
 .faction,
 .end {
-  display: block;
+  display: flex;
   z-index: 10;
   position: fixed;
   top: 0;
   background: rgba(0,0,0,0.5);
   width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .end {
@@ -167,17 +174,101 @@ button:active {
 }
 
 .content {
-  width: 50%;
+  width: 100%;
+  max-width: 450px;
   height: 50%;
-  background-color: #fff;
-  margin: 80px auto 0;
+  background: url(../img/modal/bg.png);
+  background-size: 100% 100%;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding-bottom: 50px;
 }
 
 .content * {
   display: block;
   margin: 5px auto;
+}
+
+.off {
+  position: relative;
+  color: yellow;
+  font-size: 2em;
+  font-weight: bold;
+
+}
+
+.off:hover,
+.off:focus {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  width: 100%;
+  background-color: transparent;
+  transition: all 0.5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #aec188;
+}
+.dropdown .select {
+  height: 50px;
+  width: 80%;
+  background: url('../img/modal/fac_caption.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+}
+
+.dropdown .dropdown-menu {
+  position: absolute;
+  background-color: #333;
+  width: 80%;
+  left: 0;
+  right: 0;
+  margin: 1px auto 0;
+  box-shadow: 0 1px 2px rgb(204, 204, 204);
+  border-radius: 0 1px 5px 5px;
+  overflow: hidden;
+  max-height: 144px;
+  overflow-y: auto;
+  z-index: 9;
+  transition: all 0.5s;
+  font-size: 1.2em;
+}
+.dropdown .dropdown-menu li {
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+.dropdown .dropdown-menu {
+  padding: 0;
+  list-style: none;
+}
+.dropdown .dropdown-menu li:hover {
+  background-color: #222;
+}
+
+.close {
+  display: none;
+  transition: all 0.5s ease-in-out;
+}
+
+.open {
+  display: block;
+  transition: all 0.5s ease-in-out;
+}
+
+#preview {
+  width: 100%;
+}
+
+#preview img {
+  width: 110px;
+  height: auto;
 }
 
 @media screen and (max-width: 760px){
@@ -187,6 +278,11 @@ button:active {
     grid-template-areas:
       "board"
       "side";
+  }
+
+  .content {
+    width: 75%;
+    height: 50%;
   }
 
   .board {

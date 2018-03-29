@@ -21,7 +21,7 @@
       <h2>Faction</h2>
       <button class="panel-deck">
         <span>Factions</span>
-        <img src="img/Back_cards/Neutral_back.png" alt="" class="deck-back">
+        <img src="" alt="" class="deck-back">
       </button>
     </div>
     <div class="lives">
@@ -71,22 +71,30 @@
   <!-- Factions modal -->
   <div class="faction">
     <div class="content">
-      <form id="start">
-        <select name="factions" id="factions">
-          <option value="Neutral">Neutral</option>
-          <option value="Monsters">Monsters</option>
-          <option value="Northern_Realms">Northern Realms</option>
-          <option value="Scoia'tael">Scoia'tael</option>
-          <option value="Nilfgaard">Nilfgaard</option>
-        </select>
-        <input type="submit" value="Start">
-      </form>
+      <div id="preview">
+        <img src="" alt="">
+      </div>
+        <div class="dropdown">
+          <div class="select">
+            <span>Select faction</span>
+          </div>
+          <input type="hidden" name="faction">
+          <ul class="dropdown-menu close">
+            <li data-faction="Neutral" class="option">Neutral</li>
+            <li data-faction="Monsters" class="option">Monsters</li>
+            <li data-faction="Northern_Realms" class="option">Northern Realms</li>
+            <li data-faction="Scoia'tael" class="option">Scoia'tael</li>
+            <li data-faction="Nilfgaard" class="option">Nilfgard</li>
+          </ul>
+        </div>
+        <button id="start">Start</button>
     </div>
   </div>
 
   <!-- End game modal -->
   <div class="end">
     <div class="content">
+      <span class="off">×</span>
       <h1 id="end-message"></h1>
     </div>
   </div>

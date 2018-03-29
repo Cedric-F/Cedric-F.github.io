@@ -4,19 +4,26 @@ const deck = document.querySelector('.board'),
       cards = document.querySelectorAll('.row img'),
       shuffleBtn = document.querySelector('#shuffle'),
       facBtn = document.querySelector('.panel-deck'),
-      getFac = document.querySelector('#start'),
-      factions = document.querySelector('#factions'),
+      factions = document.querySelector('.faction'),
       lives = document.querySelectorAll('.gems img'),
       moves = document.querySelector('.count span'),
-      start = document.querySelector('.faction'),
+      start = document.querySelector('#start'),
+      dropdown = document.querySelector('.dropdown')
+      dpMenu = document.querySelector('.dropdown .dropdown-menu'),
       end = document.querySelector('.end'),
       endMsg = document.querySelector('.end #end-message'),
+      back = document.querySelector('.deck-back'),
+      preview = document.querySelector('#preview img'),
+      close = document.querySelector('.off'),
       modal = {
         open: e => {
-          e.style.display = "block";
+          e.style.display = "flex";
           endMsg.textContent = game ? "You win!" : "You loose";
         },
-        close: e => e.style.display = "none"
+        close: e => {
+          e.style.display = "none";
+          faction ? back.src = `img/Back_cards/${faction}_back.png` : 0;
+        }
       };
 
 // Variables
@@ -31,6 +38,17 @@ let faction,
     match;
 
 // Functions
+
+const toggleMenu = e => {
+  let foo = e.target;
+  if (dpMenu.classList.contains('open')) [dpMenu.classList.remove('open'), dpMenu.classList.add('close')];
+  else if (dpMenu.classList.contains('close')) [dpMenu.classList.remove('close'), dpMenu.classList.add('open')];
+};
+const getFaction = e => {
+  if (e.target.classList.contains('option')) faction = e.target.dataset.faction;
+  preview.src = `img/Back_cards/${faction}_back.png`;
+}
+
 
 /*
  * A safety reset zeroes the counters.
@@ -116,7 +134,12 @@ const compare = (a, b) => {
 
 // Events
 
+dropdown.addEventListener("click", toggleMenu);
+dpMenu.addEventListener('click', getFaction);
+
+
 shuffleBtn.addEventListener('pointerdown', shuffle);
-facBtn.addEventListener('pointerdown', _ => modal.open(start));
-getFac.addEventListener('submit', e => [e.preventDefault(), faction = factions.value, modal.close(start), shuffle()]);
+facBtn.addEventListener('pointerdown', _ => modal.open(factions));
+start.addEventListener('pointerdown', e => faction ? [modal.close(factions), shuffle()] : 0);
 deck.addEventListener('pointerdown', flip);
+close.addEventListener('pointerdown', _ => modal.close(end));
