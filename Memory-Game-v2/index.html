@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+
+  <!-- Game HUD -->
   <aside class="side-panel">
     <h1>Gwent<br>Memory Game</h1>
     </div>
@@ -37,31 +39,58 @@
       </div>
     </div>
   </aside>
+
+  <!-- Game board -->
   <section class="board">
       <div class="row">
-        <img src="" alt="">1
-        <img src="" alt="">2
-        <img src="" alt="">3
-        <img src="" alt="">4
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
       </div>
       <div class="row">
-        <img src="" alt="">5
-        <img src="" alt="">6
-        <img src="" alt="">7
-        <img src="" alt="">8
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
       </div>
       <div class="row">
-        <img src="" alt="">1
-        <img src="" alt="">2
-        <img src="" alt="">3
-        <img src="" alt="">4
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
       </div>
       <div class="row">
-        <img src="" alt="">5
-        <img src="" alt="">6
-        <img src="" alt="">7
-        <img src="" alt="">8
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
+        <img src="" alt="" data-value="">
       </div>
   </section>
+
+  <!-- Factions modal -->
+  <div class="faction">
+    <div class="content">
+      <form id="start">
+        <select name="factions" id="factions">
+          <option value="Neutral">Neutral</option>
+          <option value="Monsters">Monsters</option>
+          <option value="Northern_realms">Northern Realms</option>
+          <option value="Scoia'tael">Scoia'tael</option>
+          <option value="Nilfgaard">Nilfgaard</option>
+        </select>
+        <input type="submit" value="Start">
+      </form>
+    </div>
+  </div>
+
+  <!-- End game modal -->
+  <div class="end">
+    <div class="content">
+      <h1 id="end-message"></h1>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
