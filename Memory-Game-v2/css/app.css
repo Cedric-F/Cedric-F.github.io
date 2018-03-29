@@ -186,13 +186,23 @@ button:active {
 }
 
 .content * {
+  margin: 0 auto;
+}
+
+.end .content {
   display: block;
-  margin: 5px auto;
+  text-align: center;
+}
+
+.end .content h1 {
+  padding-top: 25px;
 }
 
 .off {
   position: relative;
-  color: yellow;
+  right: 20px;
+  float: right;
+  color: #333;
   font-size: 2em;
   font-weight: bold;
 
@@ -211,9 +221,11 @@ button:active {
   transition: all 0.5s ease;
   position: relative;
   font-size: 14px;
-  color: #aec188;
+  color: #a4f188;
+  display: block;
 }
 .dropdown .select {
+  display: block;
   height: 50px;
   width: 80%;
   background: url('../img/modal/fac_caption.png');
@@ -268,7 +280,8 @@ button:active {
 
 #preview img {
   width: 110px;
-  height: auto;
+  height: 200px;
+  display: block;
 }
 
 @media screen and (max-width: 760px){
