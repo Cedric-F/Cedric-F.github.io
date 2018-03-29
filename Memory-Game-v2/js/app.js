@@ -23,7 +23,7 @@ const deck = document.querySelector('.board'),
         },
         close: e => {
           e.style.display = "none";
-          faction ? back.src = `img/Back_cards/${faction}_back.png` : 0;
+          faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
         }
       };
 
@@ -47,7 +47,7 @@ const toggleMenu = e => {
 };
 const getFaction = e => {
   if (e.target.classList.contains('option')) faction = e.target.dataset.faction;
-  preview.src = `img/Back_cards/${faction}_back.png`;
+  preview.src = `img/back_cards/${faction}_back.png`;
 }
 
 
@@ -69,7 +69,7 @@ const shuffle = _ => {
   for (card of cards) {
     index = order[~~(Math.random() * order.length)];
     card.dataset.value = index;
-    card.src = `img/Back_cards/${faction}_back.png`;
+    card.src = `img/back_cards/${faction}_back.png`;
     card.classList.add('card');
     card.classList.remove('open');
     order.splice(order.indexOf(index), 1);
@@ -87,7 +87,7 @@ const flip = e => {
   let card = e.target.classList.contains('card') ? e.target : null;
   if (card && !card.classList.contains('open')) {
     card.classList.add('open');
-    card.src = `img/Faction_cards/${faction}/card${card.dataset.value}.png`;
+    card.src = `img/faction_cards/${faction}/card${card.dataset.value}.png`;
     one ? two ? 0 : two = card : one = card;
     (one && two) ? compare(one, two) : 0;
   }
@@ -125,7 +125,7 @@ const compare = (a, b) => {
     if (a.dataset.value == b.dataset.value) {
       if (++match == 8) modal.open(end);
     } else {
-      [a.src = `img/Back_cards/${faction}_back.png`, b.src = `img/Back_cards/${faction}_back.png`];
+      [a.src = `img/back_cards/${faction}_back.png`, b.src = `img/back_cards/${faction}_back.png`];
       [a.classList.remove('open'), b.classList.remove('open')];
     }
 
