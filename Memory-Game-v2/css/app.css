@@ -133,12 +133,15 @@ button:active {
 }
 
 .cog {
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 48px;
   height: 48px;
   color: #c19b6c;
-  background: #0005;
+  background: #0009;
   border: #c19d6c solid 2px;
-  outline: #0005 2px solid;
+  outline: #0009 2px solid;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,6 +187,7 @@ button:active {
 }
 
 .row img:hover,
+.row img:focus,
 .hold {
   transform: translate3d(0, -10px, 0);
   box-shadow: -1px 5px 5px rgba(255, 255, 0, 0.6);
@@ -217,7 +221,7 @@ button:active {
   width: 100%;
   max-width: 450px;
   height: 50%;
-  background: url(../img/modal/bg.png);
+  background: url(../img/modal/bg.png) no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-wrap: wrap;
@@ -225,9 +229,6 @@ button:active {
   padding-bottom: 50px;
   border-style: solid;
   border-width: 20px 20px 21px 22px;
-  -moz-border-image: url(../img/modal/frame.png) 20 20 21 22;
-  -webkit-border-image: url(../img/modal/frame.png) 20 20 21 22;
-  -o-border-image: url(../img/modal/frame.png) 20 20 21 22;
   border-image: url(../img/modal/frame.png) 20 20 21 22 fill;
 }
 
@@ -289,6 +290,7 @@ button:active {
  *********************/
 
  #arrow-icon {
+  transform: rotateX(180deg);
   display: inline-block;
   position: relative;
   width: 0;

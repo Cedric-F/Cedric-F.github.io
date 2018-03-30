@@ -38,6 +38,7 @@ const end = document.querySelector('.end'), // end game modal
  */
 let faction,
     game,
+    foo,
     one, two,
     match;
 
@@ -46,8 +47,8 @@ const modal = {
           e.style.display = 'flex';
           endMsg.textContent = game ? 'You win!' : 'You loose';
           if (moves.textContent) {
-            timeScore.textContent = 0;
-            movesScore.textContent = moves.textContent;
+            timeScore.textContent = (!userSettings.gameplay.checked) ? [moves.textContent - 45, clearInterval(foo)] : 0;
+            movesScore.textContent = (userSettings.gameplay.checked) ? moves.textContent : 0;
             livesScore.textContent = lives.length;
           }
           if (!userSettings.sound.checked) {
@@ -58,7 +59,7 @@ const modal = {
         close: e => {
           e.style.display = 'none';
           faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
-          e == settings ? shuffle() : 0;
+          shuffle();
           if (!userSettings.sound.checked) {
             audio.close.currentTime = 0;
             audio.close.play();
@@ -122,8 +123,14 @@ const getFaction = e => {
  * Deal the cards, faces down.
  */
 const shuffle = _ => {
+  game = true;
+  clearInterval(foo);
 
   moves.textContent = one = two = match = 0;
+  if (!userSettings.gameplay.checked) {
+    moves.textContent = 45;
+    foo = setInterval(timer, 1000);
+  }
   for (let i = 0; i < 3; i++) lives[i].style.display = 'inline';
 
   let order = [...Array(16)].map((e, i) => i > 7 ? i = i - 7 : i + 1),
@@ -143,13 +150,14 @@ const shuffle = _ => {
  * If the card is already open, do nothing.
  * Else, open the card and store it in one of the 2 card holders.
  * Once both card holders have a card, compare them.
+ *
+ * If the player choose the Timed gameplay, start the timer.
  */
 const flip = e => {
-  game = true;
   let card = e.target.classList.contains('card') ? e.target : null;
   if (card && !card.classList.contains('open')) {
     card.classList.add('open', 'hold');
-    card.src = `img/faction_cards/${faction}/card${card.dataset.value}.png`;
+    if (userSettings.difficulty.checked) card.src = `img/faction_cards/${faction}/card${card.dataset.value}.png`;
     one ? two ? 0 : two = card : one = card;
     (one && two) ? compare(one, two) : 0;
     if (!userSettings.sound.checked) {
@@ -166,13 +174,27 @@ const flip = e => {
  */
 const rate = _ => {
   let count = moves.textContent;
-  if (count == 12) lives[2].style.display = 'none';
-  else if (count == 18) lives[1].style.display = 'none';
-  else if (count == 24) {
-    lives[0].style.display = 'none';
-    game = false;
+  if (userSettings.gameplay.checked) {
+    if (count == 12) lives[2].style.display = 'none';
+    else if (count == 18) lives[1].style.display = 'none';
+    else if (count == 24) {
+      lives[0].style.display = 'none';
+      game = false;
+      modal.open(end);
+    }
+  }
+};
+
+/*
+ * A countdown for the Timer gameplay.
+ */
+const timer = _ => {
+  console.log(--moves.textContent);
+  if (!+moves.textContent) {
+    clearInterval(foo);
     modal.open(end);
   }
+
 }
 
 /*
@@ -185,11 +207,15 @@ const rate = _ => {
  */
 const compare = (a, b) => {
   deck.removeEventListener('pointerdown', flip);
-  moves.textContent++;
+  if (userSettings.gameplay.checked) moves.textContent++;
   rate();
   one = two = 0;
   setTimeout(_ => {
     if (a.dataset.value == b.dataset.value) {
+      if (!userSettings.difficulty.checked) {
+        a.src = `img/faction_cards/${faction}/card${a.dataset.value}.png`;
+        b.src = `img/faction_cards/${faction}/card${b.dataset.value}.png`;
+      }
       if (++match == 8) modal.open(end);
     } else {
       a.src = `img/back_cards/${faction}_back.png`;
@@ -220,12 +246,13 @@ close[1].addEventListener('pointerdown', _ => modal.close(end));
 
 
 // If a faction is selected, close the modal and shuffle the deck.
-start.addEventListener('pointerdown', _ => faction ? [modal.close(factions), shuffle()] : 0);
+start.addEventListener('pointerdown', _ => faction ? modal.close(factions) : 0);
 
 document.addEventListener('keydown', e => {
   switch (e.code) {
     case "Escape":
-      modal.close(end) || modal.close(settings);
+      if (end.style.display === "flex") modal.close(end)
+      else if (settings.style.display === "flex" ) modal.close(settings);
       break;
     /*
     case: "ArrowLeft":
