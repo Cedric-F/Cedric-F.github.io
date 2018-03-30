@@ -76,9 +76,8 @@
       </div>
         <div class="dropdown">
           <div class="select">
-            <span>Select faction</span>
+            <span>Select faction <span id="arrow-icon"></span></span>
           </div>
-          <input type="hidden" name="faction">
           <ul class="dropdown-menu close">
             <li data-faction="neutral" class="option">Neutral</li>
             <li data-faction="monsters" class="option">Monsters</li>
@@ -96,7 +95,7 @@
     <div class="content">
       <span class="off">×</span>
       <h1 id="end-message"></h1>
-      <table>
+      <table id="scores">
         <thead>
           <tr>
             <th>Lives</th>

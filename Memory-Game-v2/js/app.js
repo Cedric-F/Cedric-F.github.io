@@ -1,33 +1,34 @@
-// DOM elements
-const deck = document.querySelector('.board'),
-      rows = document.querySelectorAll('.row'),
-      cards = document.querySelectorAll('.row img'),
-      shuffleBtn = document.querySelector('#shuffle'),
-      facBtn = document.querySelector('.panel-deck'),
-      factions = document.querySelector('.faction'),
-      lives = document.querySelectorAll('.gems img'),
-      moves = document.querySelector('.count span'),
-      start = document.querySelector('#start'),
-      dropdown = document.querySelector('.dropdown'),
-      dpMenu = document.querySelector('.dropdown-menu'),
-      dpOptions = document.querySelectorAll('.option')
-      end = document.querySelector('.end'),
-      endMsg = document.querySelector('.end #end-message'),
-      back = document.querySelector('.deck-back'),
-      preview = document.querySelector('#preview img'),
-      close = document.querySelector('.off'),
-      modal = {
-        open: e => {
-          e.style.display = "flex";
-          endMsg.textContent = game ? "You win!" : "You loose";
-        },
-        close: e => {
-          e.style.display = "none";
-          faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
-        }
-      };
+/****************
+ * DOM elements *
+ ****************/
 
-// Variables
+const end = document.querySelector('.end'), // end game modal
+      close = document.querySelector('.off'), // modal close button
+      deck = document.querySelector('.board'), // game board
+      start = document.querySelector('#start'), // start button
+      rows = document.querySelectorAll('.row'), // board rows
+      back = document.querySelector('.deck-back'), // side panel faction back card
+      cards = document.querySelectorAll('.row img'),
+      factions = document.querySelector('.faction'), // faction selector
+      moves = document.querySelector('.count span'),
+      facBtn = document.querySelector('.panel-deck'), // start game modal opener
+      lives = document.querySelectorAll('.gems img'),
+      dropdown = document.querySelector('.dropdown'), // faction selector container
+      dpArrow = document.querySelector('#arrow-icon'),
+      shuffleBtn = document.querySelector('#shuffle'),
+      endMsg = document.querySelector('#end-message'),
+      dpOptions = document.querySelectorAll('.option'), // faction selector items
+      preview = document.querySelector('#preview img'), // faction back card preview in the start game modal
+      dpMenu = document.querySelector('.dropdown-menu'), // faction selector menu
+      timeScore = document.querySelector('#total-time'),
+      movesScore = document.querySelector('#total-moves'),
+      livesScore = document.querySelector('#remaining-lives');
+
+
+
+/*************
+ * Variables *
+ *************/
 
 /*
  * faction will be used for a quick access to the different image folders
@@ -38,13 +39,46 @@ let faction,
     one, two,
     match;
 
-// Functions
+const modal = {
+        open: e => {
+          e.style.display = "flex";
+          endMsg.textContent = game ? "You win!" : "You loose";
+          if (moves.textContent) {
+            timeScore.textContent = 0;
+            movesScore.textContent = moves.textContent;
+            livesScore.textContent = lives.length;
+          }
+        },
+        close: e => {
+          e.style.display = "none";
+          faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
+        }
+      };
 
+/*************
+ * Functions *
+ *************/
+
+/*
+ * A simple toggle function that will either open or close the faction selector
+ */
 const toggleMenu = e => {
   let foo = e.target;
-  if (dpMenu.classList.contains('open')) [dpMenu.classList.remove('open'), dpMenu.classList.add('close')];
-  else if (dpMenu.classList.contains('close')) [dpMenu.classList.remove('close'), dpMenu.classList.add('open')];
+  if (dpMenu.classList.contains('open')){
+    dpMenu.classList.remove('open');
+    dpMenu.classList.add('close');
+    dpArrow.style.transform = 'rotateX(180deg)';
+  }
+  else if (dpMenu.classList.contains('close')) {
+    dpMenu.classList.remove('close');
+    dpMenu.classList.add('open');
+    dpArrow.style.transform = 'rotateX(0deg)';
+  }
 };
+
+/*
+ * Display a preview of the selected faction card.
+ */
 const getFaction = e => {
   if (e.target.classList.contains('option')) faction = e.target.dataset.faction;
   preview.src = `img/back_cards/${faction}_back.png`;
@@ -61,7 +95,7 @@ const getFaction = e => {
  */
 const shuffle = _ => {
 
-  [moves.textContent, one, two, match] = [0, 0, 0, 0];
+  moves.textContent = one = two = match = 0;
   for (let i = 0; i < 3; i++) lives[i].style.display = "inline";
 
   let order = [...Array(16)].map((e, i) => i > 7 ? i = i - 7 : i + 1),
@@ -97,8 +131,8 @@ const flip = e => {
  * Depending on the moves count value, remove the remaining life gems.
  * When there is no remaining gem, open the Ending modal.
  */
-const rate = (count = moves.textContent) => {
-  count = moves.textContent;
+const rate = _ => {
+  let count = moves.textContent;
   if (count == 12) lives[2].style.display = "none";
   else if (count == 18) lives[1].style.display = "none";
   else if (count == 24) {
@@ -120,20 +154,24 @@ const compare = (a, b) => {
   deck.removeEventListener('pointerdown', flip);
   moves.textContent++;
   rate();
-  [one, two] = [0, 0];
+  one = two = 0;
   setTimeout(_ => {
     if (a.dataset.value == b.dataset.value) {
       if (++match == 8) modal.open(end);
     } else {
-      [a.src = `img/back_cards/${faction}_back.png`, b.src = `img/back_cards/${faction}_back.png`];
-      [a.classList.remove('open'), b.classList.remove('open')];
+      a.src = `img/back_cards/${faction}_back.png`;
+      b.src = `img/back_cards/${faction}_back.png`;
+      a.classList.remove('open');
+      b.classList.remove('open');
     }
 
     setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
   }, 750);
 };
 
-// Events
+/**********
+ * Events *
+ **********/
 
 dropdown.addEventListener("click", toggleMenu);
 dpMenu.addEventListener('click', getFaction);
@@ -141,6 +179,8 @@ dpMenu.addEventListener('click', getFaction);
 
 shuffleBtn.addEventListener('pointerdown', shuffle);
 facBtn.addEventListener('pointerdown', _ => modal.open(factions));
-start.addEventListener('pointerdown', e => faction ? [modal.close(factions), shuffle()] : 0);
+
+// If a faction is selected, close the modal and shuffle the deck.
+start.addEventListener('pointerdown', _ => faction ? [modal.close(factions), shuffle()] : 0);
 deck.addEventListener('pointerdown', flip);
 close.addEventListener('pointerdown', _ => modal.close(end));

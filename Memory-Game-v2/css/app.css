@@ -21,8 +21,12 @@ body {
   grid-template-rows: 1fr;
   grid-auto-rows: 100%;
   grid-template-areas: "side board";
-  font-family: "Morpheus";
+  font-family: "Morpheus", "Gararmond";
 }
+
+/************
+ * Game HUD *
+ ************/
 
 .side-panel {
   grid-area: side;
@@ -111,6 +115,27 @@ button:active {
   height: 40px;
 }
 
+.count {
+  margin: 20px auto;
+  background: url(../img/board/moves.png) no-repeat center;
+  background-size: 100% 100%;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.count span {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  font-size: 30px;
+  height: 100%;
+}
+
+/******************
+ * Board elements *
+ ******************/
+
 .board {
   grid-area: board;
   background: url(../img/board/board.png) no-repeat;
@@ -139,22 +164,9 @@ button:active {
   width: auto;
 }
 
-.count {
-  margin: 20px auto;
-  background: url('../img/board/moves.png') no-repeat center;
-  background-size: 100% 100%;
-  width: 60px;
-  height: 60px;
-  position: relative;
-}
-
-.count span {
-  text-align: center;
-  display: block;
-  margin: 0 auto;
-  font-size: 30px;
-  height: 100%;
-}
+/**********
+ * Modals *
+ **********/
 
 .faction,
 .end {
@@ -215,17 +227,36 @@ button:active {
   cursor: pointer;
 }
 
+#scores {
+  width: 50%;
+}
+
+/*********************
+ * Custom select box *
+ *********************/
+
+ #arrow-icon {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+  right: -5px;
+  top: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid white;
+ }
+
 .dropdown {
   width: 100%;
   background-color: transparent;
-  transition: all 0.5s ease;
   position: relative;
   font-size: 14px;
   color: #a4f188;
   display: block;
 }
+
 .dropdown .select {
-  display: block;
   height: 50px;
   width: 80%;
   background: url('../img/modal/fac_caption.png');
@@ -238,40 +269,38 @@ button:active {
 
 .dropdown .dropdown-menu {
   position: absolute;
-  background-color: #333;
-  width: 80%;
+  margin: 5px auto 0;
+  padding: 0;
   left: 0;
   right: 0;
-  margin: 1px auto 0;
-  box-shadow: 0 1px 2px rgb(204, 204, 204);
-  border-radius: 0 1px 5px 5px;
+  width: 80%;
+  max-height: 150px;
   overflow: hidden;
-  max-height: 144px;
   overflow-y: auto;
-  z-index: 9;
-  transition: all 0.5s;
-  font-size: 1.2em;
+  background-color: #333;
+  box-shadow: 0 1px 2px #a4f188;
+  border-radius: 0 1px 5px 5px;
+  font-size: 1.3em;
+  list-style: none;
+  transition: all 0.5s ease;
 }
+
 .dropdown .dropdown-menu li {
   padding: 10px;
-  transition: all 0.2s ease-in-out;
+  text-shadow: 2px 2px 2px #000;
+  transition: all 0.5s ease-in-out;
 }
-.dropdown .dropdown-menu {
-  padding: 0;
-  list-style: none;
-}
+
 .dropdown .dropdown-menu li:hover {
   background-color: #222;
 }
 
 .close {
   display: none;
-  transition: all 0.5s ease-in-out;
 }
 
 .open {
   display: block;
-  transition: all 0.5s ease-in-out;
 }
 
 #preview {
@@ -294,10 +323,18 @@ button:active {
   }
 
   .content {
+    position: absolute;
+    top: 80px;
     width: 75%;
     height: 50%;
   }
 
+/*
+ * Hacky fix to make the board background overlap the side panel on smartphone.
+ * https://i.imgur.com/OOr5hyc.png
+ * Seems to require % values to fit on all type of device and avoid a blanc space at the bottom.
+ * A fixed value under 100% will create a blanc space at the bottom of the iPhone X.
+ */
   .board {
     padding-top: 70px;
     padding-bottom: 100%;
