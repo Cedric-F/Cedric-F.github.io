@@ -78,18 +78,18 @@
       <form id="user-settings">
         <h1>Sound / VFX</h1>
         <span class="radio-group">
-          <label for="Enabled"><input type="radio" name="audio" id="Enabled">Enabled</label>
-          <label for="Disabled"><input type="radio" name="audio" id="Disabled" checked>Disabled</label>
+          <label for="enabled"><input type="radio" name="audio" id="enabled">Enabled</label>
+          <label for="disabled"><input type="radio" name="audio" id="disabled" checked>Disabled</label>
         </span>
         <h1>GamePlay</h1>
         <span class="radio-group">
-          <label for="Timer"><input type="radio" name="gameplay" id="Timer">Timer</label>
-          <label for="Moves"><input type="radio" name="gameplay" id="Moves" checked>Moves</label>
+          <label for="timer"><input type="radio" name="gameplay" id="timer">Timer</label>
+          <label for="moves"><input type="radio" name="gameplay" id="moves" checked>Moves</label>
         </span>
         <h1>Difficulty</h1>
         <span class="radio-group">
-          <label for="Hard"><input type="radio" name="Difficulty" id="Hard">Hard</label>
-          <label for="Regulard"><input type="radio" name="Difficulty" id="Regulard" checked>Regulard</label>
+          <label for="hard"><input type="radio" name="difficulty" id="hard">Hard</label>
+          <label for="regular"><input type="radio" name="difficulty" id="regular" checked>Regular</label>
         </span>
       </form>
     </div>
@@ -140,6 +140,11 @@
       </table>
     </div>
   </div>
+
+  <!-- SFX -->
+  <audio src="sfx/open-modal.mp3" data-audio="open"></audio>
+  <audio src="sfx/close-modal.mp3" data-audio="close"></audio>
+  <audio src="sfx/flip.mp3" data-audio="flip"></audio>
 
   <script src="js/app.js"></script>
 </body>

@@ -2,7 +2,7 @@
 
 ## Credits
 
-### VFX
+### SFX
 
 - Menu opener: War Craft 3 - Blizzard
 - Settings click sound && Cards flip: OpenGameArt.org

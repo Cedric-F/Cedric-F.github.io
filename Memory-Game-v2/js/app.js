@@ -50,12 +50,19 @@ const modal = {
             movesScore.textContent = moves.textContent;
             livesScore.textContent = lives.length;
           }
-          e == settings && one ? one.classList.remove('hold') : 0;
+          if (!userSettings.sound.checked) {
+            audio.open.currentTime = 0;
+            audio.open.play();
+          }
         },
         close: e => {
           e.style.display = 'none';
           faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
-          e == settings ? shuffle() : 0
+          e == settings ? shuffle() : 0;
+          if (!userSettings.sound.checked) {
+            audio.close.currentTime = 0;
+            audio.close.play();
+          }
         }
       };
 
@@ -64,9 +71,15 @@ const modal = {
  * Displays controls and game rules
  */
 const userSettings = {
-  sound: true,
-  gameplay: "moves", // moves || timer
-  difficulty: "regular" // regular || hard
+  sound: document.querySelector('#disabled'),
+  gameplay: document.querySelector('#moves'), // moves || timer
+  difficulty: document.querySelector("#regular") // regular || hard
+};
+
+const audio = {
+  open: document.querySelector('audio[data-audio="open"]'),
+  close: document.querySelector('audio[data-audio="close"]'),
+  flip: document.querySelector('audio[data-audio="flip"]')
 };
 
 
@@ -120,7 +133,7 @@ const shuffle = _ => {
     card.dataset.value = index;
     card.src = `img/back_cards/${faction}_back.png`;
     card.classList.add('card');
-    card.classList.remove('open');
+    card.classList.remove('open', 'hold');
     order.splice(order.indexOf(index), 1);
   }
 };
@@ -139,7 +152,12 @@ const flip = e => {
     card.src = `img/faction_cards/${faction}/card${card.dataset.value}.png`;
     one ? two ? 0 : two = card : one = card;
     (one && two) ? compare(one, two) : 0;
+    if (!userSettings.sound.checked) {
+      audio.flip.currentTime = 0;
+      audio.flip.play();
+    }
   }
+
 };
 
 /*
@@ -191,7 +209,6 @@ const compare = (a, b) => {
 dropdown.addEventListener('click', toggleMenu);
 dpMenu.addEventListener('click', getFaction);
 
-
 deck.addEventListener('pointerdown', flip);
 shuffleBtn.addEventListener('pointerdown', shuffle);
 facBtn.addEventListener('pointerdown', _ => modal.open(factions));
@@ -204,4 +221,17 @@ close[1].addEventListener('pointerdown', _ => modal.close(end));
 
 // If a faction is selected, close the modal and shuffle the deck.
 start.addEventListener('pointerdown', _ => faction ? [modal.close(factions), shuffle()] : 0);
-document.addEventListener('keydown', e => e.code == "Escape" ? modal.close(end) || modal.close(settings) : 0);
+
+document.addEventListener('keydown', e => {
+  switch (e.code) {
+    case "Escape":
+      modal.close(end) || modal.close(settings);
+      break;
+    /*
+    case: "ArrowLeft":
+    case: "ArrowUp":
+    case: "ArrowRight":
+    case: "ArrowDown":
+    */
+  }
+});
