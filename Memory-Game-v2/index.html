@@ -5,7 +5,7 @@
   <title>Memory Game</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -38,6 +38,9 @@
         <span>0</span>
       </div>
     </div>
+    <div class="cog">
+      <span><i class="material-icons">settings</i></span>
+    </div>
   </aside>
 
   <!-- Game board -->
@@ -67,6 +70,30 @@
         <img src="" alt="" data-value="">
       </div>
   </section>
+
+  <!-- Game settings modal -->
+  <div class="settings">
+    <div class="content">
+      <span class="off">×</span>
+      <form id="user-settings">
+        <h1>Sound / VFX</h1>
+        <span class="radio-group">
+          <label for="Enabled"><input type="radio" name="audio" id="Enabled">Enabled</label>
+          <label for="Disabled"><input type="radio" name="audio" id="Disabled" checked>Disabled</label>
+        </span>
+        <h1>GamePlay</h1>
+        <span class="radio-group">
+          <label for="Timer"><input type="radio" name="gameplay" id="Timer">Timer</label>
+          <label for="Moves"><input type="radio" name="gameplay" id="Moves" checked>Moves</label>
+        </span>
+        <h1>Difficulty</h1>
+        <span class="radio-group">
+          <label for="Hard"><input type="radio" name="Difficulty" id="Hard">Hard</label>
+          <label for="Regulard"><input type="radio" name="Difficulty" id="Regulard" checked>Regulard</label>
+        </span>
+      </form>
+    </div>
+  </div>
 
   <!-- Factions modal -->
   <div class="faction">

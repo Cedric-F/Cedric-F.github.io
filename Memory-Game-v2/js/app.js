@@ -3,14 +3,16 @@
  ****************/
 
 const end = document.querySelector('.end'), // end game modal
-      close = document.querySelector('.off'), // modal close button
+      cog = document.querySelector('.cog'),
       deck = document.querySelector('.board'), // game board
       start = document.querySelector('#start'), // start button
       rows = document.querySelectorAll('.row'), // board rows
+      close = document.querySelectorAll('.off'), // modal close buttons
       back = document.querySelector('.deck-back'), // side panel faction back card
       cards = document.querySelectorAll('.row img'),
       factions = document.querySelector('.faction'), // faction selector
       moves = document.querySelector('.count span'),
+      settings = document.querySelector('.settings'),
       facBtn = document.querySelector('.panel-deck'), // start game modal opener
       lives = document.querySelectorAll('.gems img'),
       dropdown = document.querySelector('.dropdown'), // faction selector container
@@ -41,19 +43,32 @@ let faction,
 
 const modal = {
         open: e => {
-          e.style.display = "flex";
-          endMsg.textContent = game ? "You win!" : "You loose";
+          e.style.display = 'flex';
+          endMsg.textContent = game ? 'You win!' : 'You loose';
           if (moves.textContent) {
             timeScore.textContent = 0;
             movesScore.textContent = moves.textContent;
             livesScore.textContent = lives.length;
           }
+          e == settings && one ? one.classList.remove('hold') : 0;
         },
         close: e => {
-          e.style.display = "none";
+          e.style.display = 'none';
           faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
+          e == settings ? shuffle() : 0
         }
       };
+
+/*
+ * Allows the user to chose the gameplay type (race against time or moves limit), and toggle sound effects
+ * Displays controls and game rules
+ */
+const userSettings = {
+  sound: true,
+  gameplay: "moves", // moves || timer
+  difficulty: "regular" // regular || hard
+};
+
 
 /*************
  * Functions *
@@ -64,7 +79,7 @@ const modal = {
  */
 const toggleMenu = e => {
   let foo = e.target;
-  if (dpMenu.classList.contains('open')){
+  if (dpMenu.classList.contains('open')) {
     dpMenu.classList.remove('open');
     dpMenu.classList.add('close');
     dpArrow.style.transform = 'rotateX(180deg)';
@@ -96,7 +111,7 @@ const getFaction = e => {
 const shuffle = _ => {
 
   moves.textContent = one = two = match = 0;
-  for (let i = 0; i < 3; i++) lives[i].style.display = "inline";
+  for (let i = 0; i < 3; i++) lives[i].style.display = 'inline';
 
   let order = [...Array(16)].map((e, i) => i > 7 ? i = i - 7 : i + 1),
       card, index;
@@ -120,7 +135,7 @@ const flip = e => {
   game = true;
   let card = e.target.classList.contains('card') ? e.target : null;
   if (card && !card.classList.contains('open')) {
-    card.classList.add('open');
+    card.classList.add('open', 'hold');
     card.src = `img/faction_cards/${faction}/card${card.dataset.value}.png`;
     one ? two ? 0 : two = card : one = card;
     (one && two) ? compare(one, two) : 0;
@@ -133,10 +148,10 @@ const flip = e => {
  */
 const rate = _ => {
   let count = moves.textContent;
-  if (count == 12) lives[2].style.display = "none";
-  else if (count == 18) lives[1].style.display = "none";
+  if (count == 12) lives[2].style.display = 'none';
+  else if (count == 18) lives[1].style.display = 'none';
   else if (count == 24) {
-    lives[0].style.display = "none";
+    lives[0].style.display = 'none';
     game = false;
     modal.open(end);
   }
@@ -161,8 +176,8 @@ const compare = (a, b) => {
     } else {
       a.src = `img/back_cards/${faction}_back.png`;
       b.src = `img/back_cards/${faction}_back.png`;
-      a.classList.remove('open');
-      b.classList.remove('open');
+      a.classList.remove('open', 'hold');
+      b.classList.remove('open', 'hold');
     }
 
     setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
@@ -173,14 +188,20 @@ const compare = (a, b) => {
  * Events *
  **********/
 
-dropdown.addEventListener("click", toggleMenu);
+dropdown.addEventListener('click', toggleMenu);
 dpMenu.addEventListener('click', getFaction);
 
 
+deck.addEventListener('pointerdown', flip);
 shuffleBtn.addEventListener('pointerdown', shuffle);
 facBtn.addEventListener('pointerdown', _ => modal.open(factions));
 
+cog.addEventListener('pointerdown', _ => modal.open(settings));
+
+close[0].addEventListener('pointerdown', _ => modal.close(settings));
+close[1].addEventListener('pointerdown', _ => modal.close(end));
+
+
 // If a faction is selected, close the modal and shuffle the deck.
 start.addEventListener('pointerdown', _ => faction ? [modal.close(factions), shuffle()] : 0);
-deck.addEventListener('pointerdown', flip);
-close.addEventListener('pointerdown', _ => modal.close(end));
+document.addEventListener('keydown', e => e.code == "Escape" ? modal.close(end) || modal.close(settings) : 0);

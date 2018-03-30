@@ -132,6 +132,24 @@ button:active {
   height: 100%;
 }
 
+.cog {
+  width: 48px;
+  height: 48px;
+  color: #c19b6c;
+  background: #0005;
+  border: #c19d6c solid 2px;
+  outline: #0005 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.material-icons {
+  margin: 0 auto;
+}
+
+
 /******************
  * Board elements *
  ******************/
@@ -162,6 +180,14 @@ button:active {
   display: block;
   height: 100%;
   width: auto;
+  transition: all 0.5s;
+}
+
+.row img:hover,
+.hold {
+  transform: translate3d(0, -10px, 0);
+  box-shadow: -1px 5px 5px rgba(255, 255, 0, 0.6);
+  border-radius: 5px;
 }
 
 /**********
@@ -169,7 +195,8 @@ button:active {
  **********/
 
 .faction,
-.end {
+.end,
+.settings {
   display: flex;
   z-index: 10;
   position: fixed;
@@ -181,7 +208,8 @@ button:active {
   justify-content: center;
 }
 
-.end {
+.end,
+.settings {
   display: none;
 }
 
@@ -195,6 +223,12 @@ button:active {
   flex-wrap: wrap;
   align-items: flex-end;
   padding-bottom: 50px;
+  border-style: solid;
+  border-width: 20px 20px 21px 22px;
+  -moz-border-image: url(../img/modal/frame.png) 20 20 21 22;
+  -webkit-border-image: url(../img/modal/frame.png) 20 20 21 22;
+  -o-border-image: url(../img/modal/frame.png) 20 20 21 22;
+  border-image: url(../img/modal/frame.png) 20 20 21 22 fill;
 }
 
 .content * {
@@ -231,6 +265,25 @@ button:active {
   width: 50%;
 }
 
+.settings .content {
+  display: block;
+  text-align: center;
+}
+
+#user-settings {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.settings h1 {
+  margin: 10px 0;
+}
+
+.settings .radio-group {
+  display: flex;
+  justify-content: space-between;
+}
+
 /*********************
  * Custom select box *
  *********************/
@@ -259,7 +312,7 @@ button:active {
 .dropdown .select {
   height: 50px;
   width: 80%;
-  background: url('../img/modal/fac_caption.png');
+  background: url(../img/modal/fac_caption.png);
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -334,6 +387,7 @@ button:active {
  * https://i.imgur.com/OOr5hyc.png
  * Seems to require % values to fit on all type of device and avoid a blanc space at the bottom.
  * A fixed value under 100% will create a blanc space at the bottom of the iPhone X.
+ * Couldn't find any solution to visually "nest" the content of a div into another one.
  */
   .board {
     padding-top: 70px;
