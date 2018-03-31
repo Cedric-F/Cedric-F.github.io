@@ -39,27 +39,48 @@ const end = document.querySelector('.end'), // end game modal
 let faction,
     game,
     foo,
+    count,
     one, two,
     match;
 
 const modal = {
+        /*
+         * Open the modal. Depending on the game status (true → the user wins) display the ending message
+         * Display the scores depending on the gameplay:
+         *   ∟ Timer: Display both the ellapsed time, moves, and remaining lives.
+         *   ∟ Moves: Display the moves number and the remaining lives. Timer is disabled.
+         */
         open: e => {
           e.style.display = 'flex';
           endMsg.textContent = game ? 'You win!' : 'You loose';
           if (moves.textContent) {
-            timeScore.textContent = (!userSettings.gameplay.checked) ? [moves.textContent - 45, clearInterval(foo)] : 0;
-            movesScore.textContent = (userSettings.gameplay.checked) ? moves.textContent : 0;
-            livesScore.textContent = lives.length;
+            timeScore.textContent = (!userSettings.gameplay.checked) ? [moves.textContent - 45, clearInterval(foo)] : 'Disabled';
+            movesScore.textContent = count;
+            livesScore.innerHTML = game ? document.querySelector('.gems').outerHTML : 0;
           }
+          /*
+           * The audio is by default marked as disabled.
+           * This conditions checks if it has been enabled by the user.
+           * If so, play the modal opening sound.
+           */
           if (!userSettings.sound.checked) {
             audio.open.currentTime = 0;
             audio.open.play();
           }
         },
+
+        /*
+         * Hide the modal.
+         * In the start menu, the deck on the side panel takes the selected faction back face.
+         * Suffle the deck
+         * If the audio is enabled, play the modal closing sound.
+         */
         close: e => {
           e.style.display = 'none';
-          faction ? back.src = `img/back_cards/${faction}_back.png` : 0;
-          shuffle();
+          if (faction) back.src = preview.src;
+          if (e == end && !game) show();
+          game = true;
+          if (game) shuffle();
           if (!userSettings.sound.checked) {
             audio.close.currentTime = 0;
             audio.close.play();
@@ -68,8 +89,11 @@ const modal = {
       };
 
 /*
- * Allows the user to chose the gameplay type (race against time or moves limit), and toggle sound effects
- * Displays controls and game rules
+ * Allows the user to chose the gameplay type.
+ * 2 Gameplays are available:
+ *    ∟ Timer: Display a timer instead of moves count. It still counts the moves but displays it at the end only
+ *    ∟ Moves: The timer is disabled.
+ * TODO: Display controls and game rules
  */
 const userSettings = {
   sound: document.querySelector('#disabled'),
@@ -89,7 +113,7 @@ const audio = {
  *************/
 
 /*
- * A simple toggle function that will either open or close the faction selector
+ * A simple toggle function that will either open or close the custom faction selector
  */
 const toggleMenu = e => {
   let foo = e.target;
@@ -115,23 +139,28 @@ const getFaction = e => {
 
 
 /*
+ * RESET:
  * A safety reset zeroes the counters.
+ * The game status is set to "true" (meaning that the "game is on")
+ * As long as it's true, the user is a potential winner. They lose if it turns to "false"
+ * If the user has selected the Timed gameplay, a countdown is created.
+ *    ∟ The user has 45 seconds to complete the game.
  *
+ * SHUFFLE:
  * A list of pairs [1 → 8] is created
  * For each element of the cards NodeList, give to its data-value a random element from the order list.
  * Remove the given value from the order list to avoid duplicates.
  * Deal the cards, faces down.
  */
 const shuffle = _ => {
-  game = true;
   clearInterval(foo);
 
-  moves.textContent = one = two = match = 0;
+  moves.textContent = count = one = two = match = 0;
   if (!userSettings.gameplay.checked) {
     moves.textContent = 45;
     foo = setInterval(timer, 1000);
   }
-  for (let i = 0; i < 3; i++) lives[i].style.display = 'inline';
+  for (let i = 0; i < 3; i++) lives[i].src = "img/board/ruby.png";
 
   let order = [...Array(16)].map((e, i) => i > 7 ? i = i - 7 : i + 1),
       card, index;
@@ -151,7 +180,7 @@ const shuffle = _ => {
  * Else, open the card and store it in one of the 2 card holders.
  * Once both card holders have a card, compare them.
  *
- * If the player choose the Timed gameplay, start the timer.
+ * If the audio is enabled, play the card flip sound.
  */
 const flip = e => {
   let card = e.target.classList.contains('card') ? e.target : null;
@@ -165,33 +194,34 @@ const flip = e => {
       audio.flip.play();
     }
   }
-
 };
 
 /*
- * Depending on the moves count value, remove the remaining life gems.
- * When there is no remaining gem, open the Ending modal.
+ * Depending on the gameplay, and the moves (or timer) count value, remove the remaining life gems.
+ * When there is no remaining gem (the game is done and lost), open the Ending modal.
  */
 const rate = _ => {
   let count = moves.textContent;
-  if (userSettings.gameplay.checked) {
-    if (count == 12) lives[2].style.display = 'none';
-    else if (count == 18) lives[1].style.display = 'none';
-    else if (count == 24) {
-      lives[0].style.display = 'none';
-      game = false;
-      modal.open(end);
-    }
+  if ((userSettings.gameplay.checked && count == 24) || (!userSettings.gameplay.checked && count == 0)) {
+    lives[0].src = "";
+    game = false;
+    modal.open(end);
+  } else if ((userSettings.gameplay.checked && count == 18) || (!userSettings.gameplay.checked && count == 12)) {
+    lives[1].src = "";
+  } else if ((userSettings.gameplay.checked && count == 12) || (!userSettings.gameplay.checked && count == 25)) {
+    lives[2].src = "";
   }
 };
 
 /*
  * A countdown for the Timer gameplay.
+ * If it falls to 0, stop the timer and end the game;
  */
 const timer = _ => {
   console.log(--moves.textContent);
   if (!+moves.textContent) {
     clearInterval(foo);
+    game = false;
     modal.open(end);
   }
 
@@ -207,7 +237,8 @@ const timer = _ => {
  */
 const compare = (a, b) => {
   deck.removeEventListener('pointerdown', flip);
-  if (userSettings.gameplay.checked) moves.textContent++;
+  count++;
+  if (userSettings.gameplay.checked) moves.textContent = count;
   rate();
   one = two = 0;
   setTimeout(_ => {
@@ -226,6 +257,13 @@ const compare = (a, b) => {
 
     setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
   }, 750);
+};
+
+/*
+ * Show the cards if the user leaves the end game modal with the cross icon.
+ */
+const show = _ => {
+  cards.forEach(e => e.src = `img/faction_cards/${faction}/card${e.dataset.value}.png`);
 };
 
 /**********

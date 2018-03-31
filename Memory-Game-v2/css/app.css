@@ -109,6 +109,8 @@ button:active {
 }
 
 .gems img {
+  background: url(../img/board/gem.png);
+  background-size: 100% 100%;
   margin: 20px auto;
   display: block;
   width: 40px;
@@ -242,7 +244,12 @@ button:active {
 }
 
 .end .content h1 {
-  padding-top: 25px;
+  margin: 25px 0;
+  text-shadow: 1px 1px 3px #fff;
+}
+
+.end img {
+  background: none;
 }
 
 .off {
@@ -263,7 +270,18 @@ button:active {
 }
 
 #scores {
-  width: 50%;
+  width: 75%;
+  font-size: 1.2em;
+}
+
+#scores thead {
+  text-shadow: 1px 1px 3px #fff;
+}
+
+#scores th,
+#scores td {
+  width: 33%;
+  font-size: 1.2em;
 }
 
 .settings .content {
@@ -473,6 +491,11 @@ button:active {
     margin: 0;
   }
 
+  .content .gems img {
+    width: 35px;
+    height: 35px;
+  }
+
   .moves {
     order: 3;
   }
@@ -493,10 +516,41 @@ button:active {
     margin: 10px auto;
   }
 
+  #preview img {
+    height: 175px;
+    width: 95px;
+  }
+
 }
 
 @media screen and (max-width: 450px) {
   .row {
     height: 80px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #scores {
+    display: flex;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+
+  #scores th, #scores td {
+    display: table-row;
+  }
+
+  #scores th {
+    text-align: left;
+  }
+
+  #scores td {
+    text-align: right;
+  }
+}
+
+@media screen and (max-height: 650px) {
+  #preview img {
+    transform: rotate(90deg);
   }
 }
