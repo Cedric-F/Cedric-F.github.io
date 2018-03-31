@@ -59,6 +59,7 @@ The cards are reset when closing it.
 
 * Vanilla JavaScript + ES6
 * Responsive design
+
 ![](https://i.imgur.com/2XxGGGe.png)
 ![](https://i.imgur.com/otEYbvJ.png)
 
