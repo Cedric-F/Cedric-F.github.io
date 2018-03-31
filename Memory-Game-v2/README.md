@@ -83,5 +83,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - Board rows && Gems && Deck holder && Board sides: [Andy811 on DeviantArt](https://andy811.deviantart.com/art/Gwent-Board-566314735)
 - Cards: CD Projekt - Gwent The Game
 	Pack from [Adef25 on Reddit](https://www.reddit.com/r/witcher/comments/3anq4q/complete_printable_gwent_decks_in_full_300_ppi_40/)
-- Modal frames: [Siobhan68 on Pinterest](https://siobhan68.deviantart.com/art/Helmorui-Style-Frame-264031614)
+- Modal frames: [Siobhan68 on DeviantArt](https://siobhan68.deviantart.com/art/Helmorui-Style-Frame-264031614)
 - Settings icon: [Google Material Icons](http://google.github.io/material-design-icons/)
