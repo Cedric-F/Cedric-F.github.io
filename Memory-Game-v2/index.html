@@ -75,25 +75,88 @@
   <!-- Game settings modal -->
   <div class="settings">
     <div class="content">
-      <span class="off">×</span>
       <form id="user-settings">
-        <h1>Sound / VFX</h1>
+        <h1 tabindex="16">Sound</h1>
         <span class="radio-group">
-          <label for="enabled"><input type="radio" name="audio" id="enabled">Enabled</label>
-          <label for="disabled"><input type="radio" name="audio" id="disabled" checked>Disabled</label>
+          <label for="enabled" tabindex="17"><input type="radio" name="audio" id="enabled">Enabled</label>
+          <label for="disabled" tabindex="18"><input type="radio" name="audio" id="disabled" checked>Disabled</label>
         </span>
-        <h1>GamePlay</h1>
+        <h1 tabindex="19">GamePlay</h1>
         <span class="radio-group">
-          <label for="timer"><input type="radio" name="gameplay" id="timer">Timer</label>
-          <label for="moves"><input type="radio" name="gameplay" id="moves" checked>Moves</label>
+          <label for="timer" tabindex="20"><input type="radio" name="gameplay" id="timer">Timer</label>
+          <label for="moves" tabindex="21"><input type="radio" name="gameplay" id="moves" checked>Moves</label>
         </span>
-        <!-- Easter Egg -->
-        <h1>Difficulty</h1>
+        <h1 tabindex="22">Difficulty</h1>
         <span class="radio-group">
-          <label for="medium" title="For Psychics Only"><input type="radio" name="difficulty" id="medium">Medium</label>
-          <label for="regular"><input type="radio" name="difficulty" id="regular" checked>Regular</label>
+          <label for="hard" title="Are you Psychic?" tabindex="23"><input type="radio" name="difficulty" id="hard">Hard</label>
+          <label for="regular" tabindex="24"><input type="radio" name="difficulty" id="regular" checked>Regular</label>
         </span>
       </form>
+      <div id="controls">
+
+      <!--
+        <table>
+          <tr>
+            <th>Navigate through the cards with:</th>
+            <td>
+              <span class="key tab"><span>←</span><span>→</span></span>
+              <span class="key">↑</span>
+              <span class="key">→</span>
+              <span class="key">↓</span>
+              <span class="key">←</span>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td></td>
+          </tr>
+        </table>
+        <ul>
+          <li>
+            Start the game by selecting a faction and press the Start button.
+          </li>
+          <li>
+            Use the Tabulation key, the Mouse or the Arrow Keys to navigate through the cards.<br>
+            <span class="key">↑</span>
+            <span class="key">→</span>
+            <span class="key">↓</span>
+            <span class="key">←</span>
+          </li>
+          <li>
+            Press Space or Enter to flip a card, or to check an option in the user settings menu.<br>
+            <span class="key">Enter</span>
+            <span class="key">Space</span>
+          </li>
+          <li>
+            Press S to shuffle the cards.<br>
+            <span class="key">S</span>
+          </li>
+          <li>
+            Press F to change your faction.<br>
+            <span class="key">F</span>
+          </li>
+          <li>
+            Press Escape to open the user settings menu, or to close any modal.<br>
+            <span class="key">Esc</span>
+          </li>
+        </ul>
+      -->
+      </div>
+      <div id="slide">
+        <span>Display controls</span><img src="img/modal/arrow.png" alt="" class="arrow right">
+      </div>
     </div>
   </div>
 

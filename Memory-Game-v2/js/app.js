@@ -62,6 +62,7 @@ const modal = {
             movesScore.textContent = count;
             livesScore.innerHTML = game ? document.querySelector('.gems').outerHTML : 0;
           }
+
           /*
            * The audio is by default marked as disabled.
            * This conditions checks if it has been enabled by the user.
@@ -141,12 +142,12 @@ const getFaction = e => {
 }
 
 /*
- * Give a tabIndex to each card for quick navigation.
+ * Give a tabIndex to each element quick navigation.
  */
 const toggleFocus = _ => {
-  focus = true;
+  focused = true;
   cards.forEach((e, i, a) => a[i].tabIndex = i + 1);
-}
+  }
 
 /*
  * RESET:
@@ -206,6 +207,7 @@ const shortcuts = e => {
         modal.open(settings);
       }
       break;
+
     case "ArrowRight":
       if (e.target.classList.contains('card')) {
         next = cards[[...cards].indexOf(e.target) + 1];
@@ -230,14 +232,21 @@ const shortcuts = e => {
         next ? next.focus() : cards[[...cards].indexOf(e.target) + 12].focus();
       }
     break;
+
     case "Space":
     case "Enter":
       if (e.target.classList.contains('card') && e.target == document.activeElement) {
         flip(e);
+      } else if (e.target.querySelector('input')) {
+        e.target.querySelector('input').checked = true;
       }
       break;
+
     case "KeyS":
       shuffle();
+      break;
+    case "KeyF":
+      modal.open(factions);
       break;
   }
 };
@@ -258,6 +267,7 @@ const flip = e => {
     if (userSettings.difficulty.checked) card.src = `img/faction_cards/${faction}/card${card.dataset.value}.png`;
     one ? two ? 0 : two = card : one = card;
     (one && two) ? compare(one, two) : 0;
+
     if (!userSettings.sound.checked) {
       audio.flip.currentTime = 0;
       audio.flip.play();
@@ -270,15 +280,18 @@ const flip = e => {
  * When there is no remaining gem (the game is done and lost), open the Ending modal.
  */
 const rate = _ => {
-  let count = moves.textContent;
+  let count = +moves.textContent;
   if ((userSettings.gameplay.checked && count == 24) || (!userSettings.gameplay.checked && count == 0)) {
     lives[0].src = "";
+    console.log(count);
     game = false;
     modal.open(end);
   } else if ((userSettings.gameplay.checked && count == 18) || (!userSettings.gameplay.checked && count == 12)) {
     lives[1].src = "";
+    console.log(count);
   } else if ((userSettings.gameplay.checked && count == 12) || (!userSettings.gameplay.checked && count == 25)) {
     lives[2].src = "";
+    console.log(count);
   }
 };
 
@@ -288,6 +301,7 @@ const rate = _ => {
  */
 const timer = _ => {
   console.log(--moves.textContent);
+  rate();
   if (!+moves.textContent) {
     clearInterval(started);
     game = false;
@@ -300,6 +314,7 @@ const timer = _ => {
  * Disable the click listener on the deck during the comparison.
  * Count one move, and check if a life gem is consummed (rate function).
  * Reset the card holders.
+ * If the user plays in Hard difficulty, show the cards only when both are flipped.
  * If the 2 cards have the same dataset (a.k.a same card), increment the match counter
  *  ∟ If the counter is 8 (both pairs have been found), open the Ending modal.
  * Else flip back the 2 cards.
@@ -311,12 +326,12 @@ const compare = (a, b) => {
   if (userSettings.gameplay.checked) moves.textContent = count;
   rate();
   one = two = 0;
+  if (!userSettings.difficulty.checked) {
+    a.src = `img/faction_cards/${faction}/card${a.dataset.value}.png`;
+    b.src = `img/faction_cards/${faction}/card${b.dataset.value}.png`;
+  }
   setTimeout(_ => {
     if (a.dataset.value == b.dataset.value) {
-      if (!userSettings.difficulty.checked) {
-        a.src = `img/faction_cards/${faction}/card${a.dataset.value}.png`;
-        b.src = `img/faction_cards/${faction}/card${b.dataset.value}.png`;
-      }
       if (++match == 8) modal.open(end);
     } else {
       a.src = `img/back_cards/${faction}_back.png`;
@@ -349,10 +364,9 @@ facBtn.addEventListener('pointerdown', _ => modal.open(factions));
 
 // Settings modal
 cog.addEventListener('pointerdown', _ => modal.open(settings));
-close[0].addEventListener('pointerdown', _ => modal.close(settings));
 
 // End modal
-close[1].addEventListener('pointerdown', _ => modal.close(end));
+close[0].addEventListener('pointerdown', _ => modal.close(end));
 
 
 document.addEventListener('keydown', shortcuts);

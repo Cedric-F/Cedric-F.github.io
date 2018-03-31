@@ -271,7 +271,6 @@ button:active {
 
 #scores {
   width: 75%;
-  font-size: 1.2em;
 }
 
 #scores thead {
@@ -285,22 +284,85 @@ button:active {
 }
 
 .settings .content {
-  display: block;
   text-align: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 0 10px;
+  font-family: "Gararmond";
 }
 
 #user-settings {
   width: 100%;
-  margin-top: 25px;
 }
 
 .settings h1 {
   margin: 10px 0;
+  font-size: 1.8em;
 }
 
 .settings .radio-group {
   display: flex;
   justify-content: space-between;
+  font-size: 1.2em;
+}
+
+.radio-group label {
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+#slide {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.2em;
+}
+
+#slide * {
+  margin: 0;
+}
+
+.arrow {
+  display: block;
+  margin: 0;
+  width: 45px;
+  height: auto;
+  order: 2;
+}
+
+#controls {
+  display: block;
+}
+
+#controls ul {
+  width: 90%;
+  text-align: left;
+  list-style: none;
+}
+
+.key {
+  height: 30px;
+  width: 60px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  background: #fff;
+  border-radius: 5px;
+  border: solid 1px black;
+  font-family: Arial;
+  box-shadow: 0 5px 0 0 #eee;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab span {
+  line-height: 1;
 }
 
 /*********************
@@ -527,9 +589,30 @@ button:active {
   .row {
     height: 80px;
   }
+
+  #user-settings {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #user-settings h1 {
+    font-size: 1em;
+    width: 33%;
+  }
+
+  .radio-group {
+    margin: 0;
+    width: 60%;
+  }
+
+  .radio-group label {
+    font-size: 0.8em;
+    width: 30%;
+  }
 }
 
 @media screen and (max-width: 400px) {
+
   #scores {
     display: flex;
     border-collapse: separate;
@@ -550,7 +633,16 @@ button:active {
 }
 
 @media screen and (max-height: 650px) {
+
+  #user-settings {
+    margin: 0;
+  }
+
   #preview img {
     transform: rotate(90deg);
+  }
+
+  #arrow {
+    width: 35px;
   }
 }
