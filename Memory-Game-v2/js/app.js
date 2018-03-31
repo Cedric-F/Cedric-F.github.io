@@ -38,8 +38,10 @@ const end = document.querySelector('.end'), // end game modal
  */
 let faction,
     game,
-    foo,
+    started,
     count,
+    focused,
+    next,
     one, two,
     match;
 
@@ -54,7 +56,9 @@ const modal = {
           e.style.display = 'flex';
           endMsg.textContent = game ? 'You win!' : 'You loose';
           if (moves.textContent) {
-            timeScore.textContent = (!userSettings.gameplay.checked) ? [moves.textContent - 45, clearInterval(foo)] : 'Disabled';
+            clearInterval(started);
+
+            timeScore.textContent = (!userSettings.gameplay.checked) ? Math.abs(moves.textContent - 45) : 'Disabled';
             movesScore.textContent = count;
             livesScore.innerHTML = game ? document.querySelector('.gems').outerHTML : 0;
           }
@@ -78,7 +82,6 @@ const modal = {
         close: e => {
           e.style.display = 'none';
           if (faction) back.src = preview.src;
-          if (e == end && !game) show();
           game = true;
           if (game) shuffle();
           if (!userSettings.sound.checked) {
@@ -116,7 +119,7 @@ const audio = {
  * A simple toggle function that will either open or close the custom faction selector
  */
 const toggleMenu = e => {
-  let foo = e.target;
+  let started = e.target;
   if (dpMenu.classList.contains('open')) {
     dpMenu.classList.remove('open');
     dpMenu.classList.add('close');
@@ -137,6 +140,13 @@ const getFaction = e => {
   preview.src = `img/back_cards/${faction}_back.png`;
 }
 
+/*
+ * Give a tabIndex to each card for quick navigation.
+ */
+const toggleFocus = _ => {
+  focus = true;
+  cards.forEach((e, i, a) => a[i].tabIndex = i + 1);
+}
 
 /*
  * RESET:
@@ -153,12 +163,13 @@ const getFaction = e => {
  * Deal the cards, faces down.
  */
 const shuffle = _ => {
-  clearInterval(foo);
+  clearInterval(started);
 
   moves.textContent = count = one = two = match = 0;
+  if (!focused) toggleFocus();
   if (!userSettings.gameplay.checked) {
     moves.textContent = 45;
-    foo = setInterval(timer, 1000);
+    started = setInterval(timer, 1000);
   }
   for (let i = 0; i < 3; i++) lives[i].src = "img/board/ruby.png";
 
@@ -168,11 +179,69 @@ const shuffle = _ => {
     index = order[~~(Math.random() * order.length)];
     card.dataset.value = index;
     card.src = `img/back_cards/${faction}_back.png`;
+    // For screen readers. Find coordinates (x,y) for each card thanks to their tabIndex.
+    card.alt = `card number ${index}. Position (x:${(card.tabIndex > 4 ? card.tabIndex - 4 : card.tabIndex)}, y:${card.tabIndex > 12 ? 4 : (card.tabIndex > 8 ? 3 : (card.tabIndex > 4 ? 2 : 1))})`;
     card.classList.add('card');
     card.classList.remove('open', 'hold');
     order.splice(order.indexOf(index), 1);
   }
 };
+
+/*
+ * Esc → close any modal OR open settings
+ * Arrows (up, right, down, left) → Navigate through the cards with the focus.
+ * Space/Enter → Flip the focused card.
+ * S → Shuffle
+ */
+
+const shortcuts = e => {
+  console.log(e.code);
+  switch (e.code) {
+    case "Escape":
+      if (end.style.display === "flex") {
+        modal.close(end);
+      } else if (settings.style.display === "flex" ) {
+        modal.close(settings);
+      } else if ((end.style.display === "none" || end.style.display === "") && (factions.style.display === "none" || factions.style.display === "") && (settings.style.display === "none" || settings.style.display === "")) {
+        modal.open(settings);
+      }
+      break;
+    case "ArrowRight":
+      if (e.target.classList.contains('card')) {
+        next = cards[[...cards].indexOf(e.target) + 1];
+        next ? next.focus() : cards[0].focus();
+      }
+      break;
+    case "ArrowLeft":
+      if (e.target.classList.contains('card')) {
+        next = cards[[...cards].indexOf(e.target) - 1];
+        next ? next.focus() : cards[cards.length - 1].focus();
+      }
+      break;
+    case "ArrowDown":
+      if (e.target.classList.contains('card')) {
+        next = cards[[...cards].indexOf(e.target) + 4];
+        next ? next.focus() : cards[[...cards].indexOf(e.target) % 4].focus();
+      }
+      break;
+    case "ArrowUp":
+      if (e.target.classList.contains('card')) {
+        next = cards[[...cards].indexOf(e.target) - 4];
+        next ? next.focus() : cards[[...cards].indexOf(e.target) + 12].focus();
+      }
+    break;
+    case "Space":
+    case "Enter":
+      if (e.target.classList.contains('card') && e.target == document.activeElement) {
+        flip(e);
+      }
+      break;
+    case "KeyS":
+      shuffle();
+      break;
+  }
+};
+
 
 /*
  * First check if the clicked element is a card.
@@ -220,7 +289,7 @@ const rate = _ => {
 const timer = _ => {
   console.log(--moves.textContent);
   if (!+moves.textContent) {
-    clearInterval(foo);
+    clearInterval(started);
     game = false;
     modal.open(end);
   }
@@ -237,6 +306,7 @@ const timer = _ => {
  */
 const compare = (a, b) => {
   deck.removeEventListener('pointerdown', flip);
+  document.removeEventListener('keydown', shortcuts);
   count++;
   if (userSettings.gameplay.checked) moves.textContent = count;
   rate();
@@ -255,48 +325,34 @@ const compare = (a, b) => {
       b.classList.remove('open', 'hold');
     }
 
-    setTimeout(_ => deck.addEventListener('pointerdown', flip), 0); // toggle back the flip function
+    setTimeout(_ => {
+      deck.addEventListener('pointerdown', flip);
+      document.addEventListener('keydown', shortcuts);
+    }, 0); // toggle back the flip function
   }, 750);
-};
-
-/*
- * Show the cards if the user leaves the end game modal with the cross icon.
- */
-const show = _ => {
-  cards.forEach(e => e.src = `img/faction_cards/${faction}/card${e.dataset.value}.png`);
 };
 
 /**********
  * Events *
  **********/
 
+// Start modal events
 dropdown.addEventListener('click', toggleMenu);
 dpMenu.addEventListener('click', getFaction);
+// Launch the game only if a faction is selected.
+start.addEventListener('pointerdown', _ => faction ? modal.close(factions) : 0);
 
+// Board events
 deck.addEventListener('pointerdown', flip);
 shuffleBtn.addEventListener('pointerdown', shuffle);
 facBtn.addEventListener('pointerdown', _ => modal.open(factions));
 
+// Settings modal
 cog.addEventListener('pointerdown', _ => modal.open(settings));
-
 close[0].addEventListener('pointerdown', _ => modal.close(settings));
+
+// End modal
 close[1].addEventListener('pointerdown', _ => modal.close(end));
 
 
-// If a faction is selected, close the modal and shuffle the deck.
-start.addEventListener('pointerdown', _ => faction ? modal.close(factions) : 0);
-
-document.addEventListener('keydown', e => {
-  switch (e.code) {
-    case "Escape":
-      if (end.style.display === "flex") modal.close(end)
-      else if (settings.style.display === "flex" ) modal.close(settings);
-      break;
-    /*
-    case: "ArrowLeft":
-    case: "ArrowUp":
-    case: "ArrowRight":
-    case: "ArrowDown":
-    */
-  }
-});
+document.addEventListener('keydown', shortcuts);
