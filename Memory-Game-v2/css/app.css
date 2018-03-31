@@ -430,6 +430,10 @@ button:active {
   background-color: #222;
 }
 
+.faction-menu {
+  width: 100%;
+}
+
 .close {
   display: none;
 }
@@ -448,7 +452,7 @@ button:active {
   display: block;
 }
 
-@media screen and (max-width: 760px){
+@media screen and (max-width: 760px) {
   body {
     grid-template-columns: 1fr;
     grid-template-rows: min-content min-content;
@@ -644,5 +648,123 @@ button:active {
 
   #arrow {
     width: 35px;
+  }
+
+  .faction {
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-height: 420px) {
+  .settings .content {
+    box-sizing: border-box;
+  }
+}
+
+
+/*
+ * Landscape mode
+ */
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: visible;
+    position: fixed;
+    top: 100%;
+  }
+
+  .rows {
+    transform: rotate(90deg);
+  }
+
+  .row {
+    height: 70px;
+  }
+
+  .moves {
+    order: 2;
+    transform: rotate(90deg);
+  }
+
+  .factions {
+    order: 1;
+  }
+
+  .lives {
+    position: absolute;
+    top: 0;
+    width: 160px;
+  }
+
+  .shuffle-btn {
+    order: 3;
+    height: 50px;
+    width: 100px;
+    font-size: 0.9em;
+  }
+
+  #shuffle {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+
+  .gems {
+    width: 100%;
+  }
+
+  .side-panel h1 {
+    display: none;
+  }
+
+  .settings,
+  .faction,
+  .end {
+    position: absolute;
+    height: 100vw;
+  }
+
+  #controls,
+  #slide {
+    display: none;
+  }
+
+  #user-settings {
+    transform: rotate(90deg);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #user-settings h1 {
+    font-size: 1em;
+    width: 33%;
+  }
+
+  .radio-group {
+    margin: 0;
+    width: 60%;
+  }
+
+  .radio-group label {
+    font-size: 0.8em;
+    width: 30%;
+  }
+
+  .end .content {
+    transform: rotate(90deg);
+  }
+
+  .faction-menu {
+    width: 250px;
+    transform: rotate(90deg);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #controls,
+  #slide {
+    display: none;
   }
 }

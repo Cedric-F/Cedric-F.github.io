@@ -47,8 +47,9 @@ The cards are reset when closing it.
 
 ### Keyboards shortcuts
 
-"Escape" | Open the Settings menu. Close the opened modals.
+Key | Action
 ---|---
+"Escape" | Open the Settings menu. Close the opened modals. Mobile users can tap outside the modal area to close it.
 "Space", "Enter" | If the focus is on a card, flip it. If the focus is on a HUD element (Settings options...), check it.
 ↑ ← ↓ → | Navigate through the cards on the board.
 "S" | Shuffle the cards.

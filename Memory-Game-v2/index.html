@@ -46,6 +46,7 @@
 
   <!-- Game board -->
   <section class="board">
+    <div class="rows">
       <div class="row">
         <img src="" alt="" data-value="">
         <img src="" alt="" data-value="">
@@ -70,6 +71,7 @@
         <img src="" alt="" data-value="">
         <img src="" alt="" data-value="">
       </div>
+    </div>
   </section>
 
   <!-- Game settings modal -->
@@ -93,7 +95,30 @@
         </span>
       </form>
       <div id="controls">
-
+      <table>
+        <tbody>
+          <tr>
+            <th>"Escape"</th>
+            <td>Open the Settings menu. Close the opened modals.</td>
+          </tr>
+          <tr>
+            <th>"Space", "Enter"</th>
+            <td>If the focus is on a card, flip it. If the focus is on a HUD element (Settings options...), check it.</td>
+          </tr>
+          <tr>
+            <th>↑ ← ↓ →</th>
+            <td>Navigate through the cards on the board.</td>
+          </tr>
+          <tr>
+            <th>"S"</th>
+            <td>Shuffle the cards.</td>
+          </tr>
+          <tr>
+            <th>"F"</th>
+            <td>Opens the faction selector.</td>
+          </tr>
+        </tbody>
+      </table>
       <!--
         <table>
           <tr>
@@ -166,6 +191,7 @@
       <div id="preview">
         <img src="" alt="">
       </div>
+      <div class="faction-menu">
         <div class="dropdown">
           <div class="select">
             <span>Select faction <span id="arrow-icon"></span></span>
@@ -179,6 +205,7 @@
           </ul>
         </div>
         <button id="start">Start</button>
+      </div>
     </div>
   </div>
 

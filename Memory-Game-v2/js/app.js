@@ -370,3 +370,9 @@ close[0].addEventListener('pointerdown', _ => modal.close(end));
 
 
 document.addEventListener('keydown', shortcuts);
+
+// Close the modals when taping outside their content area (for mobile users)
+document.addEventListener('pointerdown', e => {
+  e.target.classList == "settings" ? modal.close(settings) :
+  e.target.classList == "end" ? modal.close(end) : 0
+});
