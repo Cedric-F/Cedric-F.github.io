@@ -223,6 +223,7 @@ button:active {
   width: 100%;
   max-width: 450px;
   height: 50%;
+  min-height: 500px;
   background: url(../img/modal/bg.png) no-repeat;
   background-size: 100% 100%;
   display: flex;

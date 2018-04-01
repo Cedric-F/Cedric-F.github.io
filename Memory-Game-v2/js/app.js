@@ -102,7 +102,7 @@ const modal = {
 const userSettings = {
   sound: document.querySelector('#disabled'),
   gameplay: document.querySelector('#moves'), // moves || timer
-  difficulty: document.querySelector("#regular"), // regular || hard
+  difficulty: document.querySelector('#regular'), // regular || hard
 
   // Styling purpose:
   form: document.querySelector('#user-settings'), // Settings form
@@ -187,7 +187,7 @@ const shuffle = _ => {
     moves.textContent = 45;
     started = setInterval(timer, 1000);
   }
-  for (let i = 0; i < 3; i++) lives[i].src = "img/board/ruby.png";
+  for (let i = 0; i < 3; i++) lives[i].src = 'img/board/ruby.png';
 
   let order = [...Array(16)].map((e, i) => i > 7 ? i = i - 7 : i + 1),
       card, index;
@@ -213,43 +213,43 @@ const shuffle = _ => {
 const shortcuts = e => {
   console.log(e.code);
   switch (e.code) {
-    case "Escape":
-      if (end.style.display === "flex") {
+    case 'Escape':
+      if (end.style.display === 'flex') {
         modal.close(end);
-      } else if (settings.style.display === "flex" ) {
+      } else if (settings.style.display === 'flex' ) {
         modal.close(settings);
-      } else if ((end.style.display === "none" || end.style.display === "") && (factions.style.display === "none" || factions.style.display === "") && (settings.style.display === "none" || settings.style.display === "")) {
+      } else if ((end.style.display === 'none' || end.style.display === '') && (factions.style.display === 'none' || factions.style.display === '') && (settings.style.display === 'none' || settings.style.display === '')) {
         modal.open(settings);
       }
       break;
 
-    case "ArrowRight":
+    case 'ArrowRight':
       if (e.target.classList.contains('card')) {
         next = cards[[...cards].indexOf(e.target) + 1];
         next ? next.focus() : cards[0].focus();
       }
       break;
-    case "ArrowLeft":
+    case 'ArrowLeft':
       if (e.target.classList.contains('card')) {
         next = cards[[...cards].indexOf(e.target) - 1];
         next ? next.focus() : cards[cards.length - 1].focus();
       }
       break;
-    case "ArrowDown":
+    case 'ArrowDown':
       if (e.target.classList.contains('card')) {
         next = cards[[...cards].indexOf(e.target) + 4];
         next ? next.focus() : cards[[...cards].indexOf(e.target) % 4].focus();
       }
       break;
-    case "ArrowUp":
+    case 'ArrowUp':
       if (e.target.classList.contains('card')) {
         next = cards[[...cards].indexOf(e.target) - 4];
         next ? next.focus() : cards[[...cards].indexOf(e.target) + 12].focus();
       }
     break;
 
-    case "Space":
-    case "Enter":
+    case 'Space':
+    case 'Enter':
       if (e.target.classList.contains('card') && e.target == document.activeElement) {
         flip(e);
       } else if (e.target.querySelector('input')) {
@@ -257,10 +257,10 @@ const shortcuts = e => {
       }
       break;
 
-    case "KeyS":
+    case 'KeyS':
       shuffle();
       break;
-    case "KeyF":
+    case 'KeyF':
       modal.open(factions);
       break;
   }
@@ -297,15 +297,15 @@ const flip = e => {
 const rate = _ => {
   let count = +moves.textContent;
   if ((userSettings.gameplay.checked && count == 24) || (!userSettings.gameplay.checked && count == 0)) {
-    lives[0].src = "";
+    lives[0].src = ''
     console.log(count);
     game = false;
     modal.open(end);
   } else if ((userSettings.gameplay.checked && count == 18) || (!userSettings.gameplay.checked && count == 12)) {
-    lives[1].src = "";
+    lives[1].src = '';
     console.log(count);
   } else if ((userSettings.gameplay.checked && count == 12) || (!userSettings.gameplay.checked && count == 25)) {
-    lives[2].src = "";
+    lives[2].src = '';
     console.log(count);
   }
 };
@@ -388,7 +388,8 @@ document.addEventListener('keydown', shortcuts);
 
 // Close the modals when taping outside their content area (for mobile users)
 document.addEventListener('pointerdown', e => {
-  e.target.classList == "settings" ? modal.close(settings) :
-  e.target.classList == "end" ? modal.close(end) : 0});
+  e.target.classList == 'settings' ? modal.close(settings) :
+  e.target.classList == 'end' ? modal.close(end) : 0
+});
 
 document.querySelector('#slide').addEventListener('pointerdown', toggleControls);
