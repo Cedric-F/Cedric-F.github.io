@@ -64,13 +64,15 @@ Key | Action
 ![](https://i.imgur.com/2XxGGGe.png)
 ![](https://i.imgur.com/otEYbvJ.png)
 
-## Authors
+![](https://i.imgur.com/0zbfEke.png)
 
-* **Cédric F** - *Design and Development* - [Profile](https://github.com/Cedric-F)
+## Author
+
+* **Cédric F** - *Design and Dev* - [Profile](https://github.com/Cedric-F)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is not licensed.
 
 ## Credits
 
