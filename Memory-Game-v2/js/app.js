@@ -367,8 +367,8 @@ const compare = (a, b) => {
  **********/
 
 // Start modal events
-dropdown.addEventListener('click', toggleMenu);
-dpMenu.addEventListener('click', getFaction);
+dropdown.addEventListener('pointerdown', toggleMenu);
+dpMenu.addEventListener('pointerdown', getFaction);
 // Launch the game only if a faction is selected.
 start.addEventListener('pointerdown', _ => faction ? modal.close(factions) : 0);
 
