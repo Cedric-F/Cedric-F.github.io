@@ -54,7 +54,7 @@ const modal = {
          */
         open: e => {
           e.style.display = 'flex';
-          endMsg.textContent = game ? 'You win!' : 'You loose';
+          endMsg.textContent = game ? 'You win!' : 'You lose!';
           if (moves.textContent) {
             clearInterval(started);
 
