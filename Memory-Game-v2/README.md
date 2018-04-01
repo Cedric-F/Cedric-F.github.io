@@ -1,6 +1,7 @@
 # Gwent Memory Game
 
 This unofficial fan art is a tribute to the great [CD Projekt](https://www.playgwent.com/en/fan-content)'s «The Witcher»'s universe.
+It is NOT actually endorsed or promoted by CD Projectk.
 
 ## Getting Started
 
