@@ -289,10 +289,13 @@ button:active {
   align-items: center;
   padding: 0 0 10px;
   font-family: "Gararmond";
+  padding-bottom: 20px;
 }
 
 #user-settings {
   width: 100%;
+  display: block;
+  height: calc(100% - 48px);
 }
 
 .settings h1 {
@@ -313,15 +316,13 @@ button:active {
 }
 
 #slide {
+  height: 48px;
   width: 250px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   font-size: 1.2em;
-}
-
-#slide * {
-  margin: 0;
+  border: 2px solid #000;
 }
 
 .arrow {
@@ -333,36 +334,13 @@ button:active {
 }
 
 #controls {
-  display: block;
-}
-
-#controls ul {
-  width: 90%;
-  text-align: left;
-  list-style: none;
-}
-
-.key {
-  height: 30px;
-  width: 60px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  background: #fff;
-  border-radius: 5px;
-  border: solid 1px black;
-  font-family: Arial;
-  box-shadow: 0 5px 0 0 #eee;
-}
-
-.tab {
-  display: flex;
-  flex-direction: column;
+  display: none;
+  height: calc(100% - 48px);
   align-items: center;
 }
 
-.tab span {
-  line-height: 1;
+#controls table {
+  width: 420px;
 }
 
 /*********************

@@ -102,7 +102,11 @@ const modal = {
 const userSettings = {
   sound: document.querySelector('#disabled'),
   gameplay: document.querySelector('#moves'), // moves || timer
-  difficulty: document.querySelector("#regular") // regular || hard
+  difficulty: document.querySelector("#regular"), // regular || hard
+
+  // Styling purpose:
+  form: document.querySelector('#user-settings'), // Settings form
+  controls: document.querySelector('#controls') // Controls table
 };
 
 const audio = {
@@ -120,13 +124,11 @@ const audio = {
  * A simple toggle function that will either open or close the custom faction selector
  */
 const toggleMenu = e => {
-  let started = e.target;
   if (dpMenu.classList.contains('open')) {
     dpMenu.classList.remove('open');
     dpMenu.classList.add('close');
     dpArrow.style.transform = 'rotateX(180deg)';
-  }
-  else if (dpMenu.classList.contains('close')) {
+  } else if (dpMenu.classList.contains('close')) {
     dpMenu.classList.remove('close');
     dpMenu.classList.add('open');
     dpArrow.style.transform = 'rotateX(0deg)';
@@ -134,7 +136,20 @@ const toggleMenu = e => {
 };
 
 /*
- * Display a preview of the selected faction card.
+ * Display the shortcuts table in the settings modal
+ */
+const toggleControls = e => {
+  if (userSettings.form.style.display === 'block') {
+    userSettings.form.style.display = 'none';
+    userSettings.controls.style.display = 'flex';
+  } else if (userSettings.form.style.display !== 'block') {
+    userSettings.controls.style.display = 'none';
+    userSettings.form.style.display = 'block';
+  }
+}
+
+/*
+ * Get the faction selected by the user and display a preview of the corresponding back face.
  */
 const getFaction = e => {
   if (e.target.classList.contains('option')) faction = e.target.dataset.faction;
@@ -374,5 +389,6 @@ document.addEventListener('keydown', shortcuts);
 // Close the modals when taping outside their content area (for mobile users)
 document.addEventListener('pointerdown', e => {
   e.target.classList == "settings" ? modal.close(settings) :
-  e.target.classList == "end" ? modal.close(end) : 0
-});
+  e.target.classList == "end" ? modal.close(end) : 0});
+
+document.querySelector('#slide').addEventListener('pointerdown', toggleControls);
