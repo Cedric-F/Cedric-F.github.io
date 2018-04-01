@@ -335,7 +335,8 @@ const timer = _ => {
  * Else flip back the 2 cards.
  */
 const compare = (a, b) => {
-  deck.removeEventListener('pointerdown', flip);
+  deck.removeEventListener('mousedown', flip);
+  deck.removeEventListener('touchstart', flip);
   document.removeEventListener('keydown', shortcuts);
   count++;
   if (userSettings.gameplay.checked) moves.textContent = count;
@@ -356,7 +357,8 @@ const compare = (a, b) => {
     }
 
     setTimeout(_ => {
-      deck.addEventListener('pointerdown', flip);
+      deck.addEventListener('mousedown', flip);
+      deck.addEventListener('touchstart', flip);
       document.addEventListener('keydown', shortcuts);
     }, 0); // toggle back the flip function
   }, 750);
@@ -367,29 +369,43 @@ const compare = (a, b) => {
  **********/
 
 // Start modal events
-dropdown.addEventListener('pointerdown', toggleMenu);
-dpMenu.addEventListener('pointerdown', getFaction);
+dropdown.addEventListener('mousedown', toggleMenu);
+dpMenu.addEventListener('mousedown', getFaction);
+dropdown.addEventListener('touchstart', toggleMenu); // iOS compatibility
+dpMenu.addEventListener('touchstart', getFaction);
+
 // Launch the game only if a faction is selected.
-start.addEventListener('pointerdown', _ => faction ? modal.close(factions) : 0);
+start.addEventListener('mousedown', _ => faction ? modal.close(factions) : 0);
+start.addEventListener('touchstart', _ => faction ? modal.close(factions) : 0);
 
 // Board events
-deck.addEventListener('pointerdown', flip);
-shuffleBtn.addEventListener('pointerdown', shuffle);
-facBtn.addEventListener('pointerdown', _ => modal.open(factions));
+deck.addEventListener('mousedown', flip);
+shuffleBtn.addEventListener('mousedown', shuffle);
+facBtn.addEventListener('mousedown', _ => modal.open(factions));
+deck.addEventListener('touchstart', flip);
+shuffleBtn.addEventListener('touchstart', shuffle);
+facBtn.addEventListener('touchstart', _ => modal.open(factions));
 
 // Settings modal
-cog.addEventListener('pointerdown', _ => modal.open(settings));
+cog.addEventListener('mousedown', _ => modal.open(settings));
+cog.addEventListener('touchstart', _ => modal.open(settings));
 
 // End modal
-close[0].addEventListener('pointerdown', _ => modal.close(end));
+close[0].addEventListener('mousedown', _ => modal.close(end));
+close[0].addEventListener('touchstart', _ => modal.close(end));
 
 
 document.addEventListener('keydown', shortcuts);
 
-// Close the modals when taping outside their content area (for mobile users)
-document.addEventListener('pointerdown', e => {
+// Close the modals when taping outside their content area
+document.addEventListener('mousedown', e => {
+  e.target.classList == 'settings' ? modal.close(settings) :
+  e.target.classList == 'end' ? modal.close(end) : 0
+});
+document.addEventListener('touchstart', e => {
   e.target.classList == 'settings' ? modal.close(settings) :
   e.target.classList == 'end' ? modal.close(end) : 0
 });
 
-document.querySelector('#slide').addEventListener('pointerdown', toggleControls);
+document.querySelector('#slide').addEventListener('mousedown', toggleControls);
+document.querySelector('#slide').addEventListener('touchstart', toggleControls);
