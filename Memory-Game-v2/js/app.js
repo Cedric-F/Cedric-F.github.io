@@ -3,13 +3,13 @@
  ****************/
 
 const end = document.querySelector('.end'), // end game modal
-      cog = document.querySelector('.cog'),
+      cog = document.querySelector('.cog'), // Settings icon
       deck = document.querySelector('.board'), // game board
       start = document.querySelector('#start'), // start button
       rows = document.querySelectorAll('.row'), // board rows
       close = document.querySelectorAll('.off'), // modal close buttons
       back = document.querySelector('.deck-back'), // side panel faction back card
-      cards = document.querySelectorAll('.row img'),
+      cards = document.querySelectorAll('.row img'), // Grabs all cards inside a board row
       factions = document.querySelector('.faction'), // faction selector
       moves = document.querySelector('.count span'),
       settings = document.querySelector('.settings'),
@@ -371,28 +371,20 @@ const compare = (a, b) => {
 // Start modal events
 dropdown.addEventListener('mousedown', toggleMenu);
 dpMenu.addEventListener('mousedown', getFaction);
-dropdown.addEventListener('touchstart', toggleMenu); // iOS compatibility
-dpMenu.addEventListener('touchstart', getFaction);
 
 // Launch the game only if a faction is selected.
 start.addEventListener('mousedown', _ => faction ? modal.close(factions) : 0);
-start.addEventListener('touchstart', _ => faction ? modal.close(factions) : 0);
 
 // Board events
 deck.addEventListener('mousedown', flip);
 shuffleBtn.addEventListener('mousedown', shuffle);
 facBtn.addEventListener('mousedown', _ => modal.open(factions));
-deck.addEventListener('touchstart', flip);
-shuffleBtn.addEventListener('touchstart', shuffle);
-facBtn.addEventListener('touchstart', _ => modal.open(factions));
 
 // Settings modal
 cog.addEventListener('mousedown', _ => modal.open(settings));
-cog.addEventListener('touchstart', _ => modal.open(settings));
 
 // End modal
 close[0].addEventListener('mousedown', _ => modal.close(end));
-close[0].addEventListener('touchstart', _ => modal.close(end));
 
 
 document.addEventListener('keydown', shortcuts);
@@ -402,10 +394,26 @@ document.addEventListener('mousedown', e => {
   e.target.classList == 'settings' ? modal.close(settings) :
   e.target.classList == 'end' ? modal.close(end) : 0
 });
+
+document.querySelector('#slide').addEventListener('mousedown', toggleControls);
+
+// Mobile touch events compatibility
+
+dropdown.addEventListener('touchstart', e => {e.preventDefault(); toggleMenu()});
+dpMenu.addEventListener('touchstart', e => {e.preventDefault(); getFaction(e)});
+
+start.addEventListener('touchstart', e => {e.preventDefault(); faction ? modal.close(factions) : 0});
+
+deck.addEventListener('touchstart', flip);
+shuffleBtn.addEventListener('touchstart', shuffle);
+facBtn.addEventListener('touchstart', e => {e.preventDefault(); modal.open(factions)});
+
+cog.addEventListener('touchstart', e => {e.preventDefault(); modal.open(settings)});
+
+close[0].addEventListener('touchstart', e => {e.preventDefault(); modal.close(end)});
+
 document.addEventListener('touchstart', e => {
+  e.preventDefault();
   e.target.classList == 'settings' ? modal.close(settings) :
   e.target.classList == 'end' ? modal.close(end) : 0
 });
-
-document.querySelector('#slide').addEventListener('mousedown', toggleControls);
-document.querySelector('#slide').addEventListener('touchstart', toggleControls);
