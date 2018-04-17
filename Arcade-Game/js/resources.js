@@ -5,15 +5,15 @@
  * to load the same image multiple times.
  */
 (function() {
-    var resourceCache = {};
-    var loading = [];
-    var readyCallbacks = [];
+    const resourceCache = {};
+    const loading = [];
+    const readyCallbacks = [];
 
     /* This is the publicly accessible image loading function. It accepts
      * an array of strings pointing to image files or a string for a single
      * image. It will then call our private image loading function accordingly.
      */
-    function load(urlOrArr) {
+    const load = (urlOrArr) => {
         if(urlOrArr instanceof Array) {
             /* If the developer passed in an array of images
              * loop through each value and call our image
@@ -34,7 +34,7 @@
     /* This is our private image loader function, it is
      * called by the public image loader function.
      */
-    function _load(url) {
+    const _load = (url) => {
         if(resourceCache[url]) {
             /* If this URL has been previously loaded it will exist within
              * our resourceCache array. Just return that image rather
@@ -45,7 +45,7 @@
             /* This URL has not been previously loaded and is not present
              * within our cache; we'll need to load this image.
              */
-            var img = new Image();
+            const img = new Image();
             img.onload = function() {
                 /* Once our image has properly loaded, add it to our cache
                  * so that we can simply return this image if the developer
@@ -74,16 +74,14 @@
      * have been previously loaded. If an image is cached, this functions
      * the same as calling load() on that URL.
      */
-    function get(url) {
-        return resourceCache[url];
-    }
+    const get = (url) => resourceCache[url];
 
     /* This function determines if all of the images that have been requested
      * for loading have in fact been properly loaded.
      */
-    function isReady() {
-        var ready = true;
-        for(var k in resourceCache) {
+    const isReady = () => {
+        let ready = true;
+        for(let k in resourceCache) {
             if(resourceCache.hasOwnProperty(k) &&
                !resourceCache[k]) {
                 ready = false;
@@ -95,9 +93,7 @@
     /* This function will add a function to the callback stack that is called
      * when all requested images are properly loaded.
      */
-    function onReady(func) {
-        readyCallbacks.push(func);
-    }
+    const onReady = (func) => readyCallbacks.push(func);
 
     /* This object defines the publicly accessible functions available to
      * developers by creating a global Resources object.

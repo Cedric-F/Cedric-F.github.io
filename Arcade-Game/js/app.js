@@ -75,7 +75,7 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-  movePlayer(dir) {
+  move(dir) {
     console.log(dir);
     switch (dir) {
       case 'left':
@@ -116,5 +116,5 @@ document.addEventListener('keyup', function(e) {
     40: 'down'
   };
 
-  player.movePlayer(dirs[e.keyCode]);
+  player.move(dirs[e.keyCode]);
 });

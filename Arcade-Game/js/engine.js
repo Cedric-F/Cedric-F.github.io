@@ -18,7 +18,7 @@ let Engine = ((global) => {
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
      */
-    var doc = global.document,
+    let doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
@@ -31,14 +31,14 @@ let Engine = ((global) => {
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
-    function main() {
+    const main = () => {
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
          */
-        var now = Date.now(),
+        let now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
         /* Call our update/render functions, pass along the time delta to
@@ -56,17 +56,17 @@ let Engine = ((global) => {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    }
+    };
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
-    function init() {
+    const init = () => {
         reset();
         lastTime = Date.now();
         main();
-    }
+    };
 
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
@@ -77,10 +77,7 @@ let Engine = ((global) => {
      * functionality this way (you could just implement collision detection
      * on the entities themselves within your app.js file).
      */
-    function update(dt) {
-        updateEntities(dt);
-        // checkCollisions();
-    }
+    const update = (dt) => updateEntities(dt);
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -89,12 +86,12 @@ let Engine = ((global) => {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
-    function updateEntities(dt) {
-        allEnemies.forEach(function(enemy) {
+    const updateEntities = (dt) => {
+        allEnemies.forEach(enemy => {
             enemy.update(dt);
         });
         player.update();
-    }
+    };
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -102,11 +99,11 @@ let Engine = ((global) => {
      * they are flipbooks creating the illusion of animation but in reality
      * they are just drawing the entire screen over and over.
      */
-    function render() {
+    const render = () => {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        var rowImages = [
+        let rowImages = [
                 'images/water-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
                 'images/stone-block.png',   // Row 2 of 3 of stone
@@ -139,13 +136,13 @@ let Engine = ((global) => {
         }
 
         renderEntities();
-    }
+    };
 
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
      */
-    function renderEntities() {
+    const renderEntities = () => {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
@@ -154,7 +151,7 @@ let Engine = ((global) => {
         });
 
         player.render();
-    }
+    };
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
