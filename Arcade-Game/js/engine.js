@@ -13,7 +13,7 @@
  * writing app.js a little simpler to work with.
  */
 
-let Engine = (global = this) => {
+let Engine = ((global) => {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
@@ -182,4 +182,4 @@ let Engine = (global = this) => {
      * from within their app.js files.
      */
     global.ctx = ctx;
-};
+})(this);
