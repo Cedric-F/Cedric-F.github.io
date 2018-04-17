@@ -85,6 +85,7 @@ const modal = {
           if (faction) back.src = preview.src;
           game = true;
           if (game) shuffle();
+          cards[0].focus();
           if (!userSettings.sound.checked) {
             audio.close.currentTime = 0;
             audio.close.play();
@@ -218,7 +219,7 @@ const shortcuts = e => {
         modal.close(end);
       } else if (settings.style.display === 'flex' ) {
         modal.close(settings);
-      } else if ((end.style.display === 'none' || end.style.display === '') && (factions.style.display === 'none' || factions.style.display === '') && (settings.style.display === 'none' || settings.style.display === '')) {
+      } else if ((end.style.display === 'none' || end.style.display === '') || (factions.style.display === 'none' || factions.style.display === '') || (settings.style.display === 'none' || settings.style.display === '')) {
         modal.open(settings);
       }
       break;
@@ -254,6 +255,19 @@ const shortcuts = e => {
         flip(e);
       } else if (e.target.querySelector('input')) {
         e.target.querySelector('input').checked = true;
+      } else if (document.querySelector('.select') == document.activeElement) {
+        dpMenu.classList.remove('close');
+        dpMenu.classList.add('open');
+      } else if (document.activeElement.classList.contains('option')) {
+        getFaction(e);
+        dpMenu.classList.remove('open');
+        dpMenu.classList.add('close');
+      } else if (faction && e.target == start) {
+        modal.close(factions);
+      } else if (e.target == shuffleBtn) {
+        shuffle();
+      } else if (e.target == facBtn) {
+        modal.open(factions);
       }
       break;
 

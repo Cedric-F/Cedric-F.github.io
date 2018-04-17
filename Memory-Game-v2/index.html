@@ -14,13 +14,12 @@
   <!-- Game HUD -->
   <aside class="side-panel">
     <h1>Gwent<br>Memory Game</h1>
-    </div>
     <div class="shuffle-btn">
-      <button id="shuffle">Shuffle</button>
+      <button id="shuffle" tabindex="33">Shuffle</button>
     </div>
     <div class="factions">
       <h2>Faction</h2>
-      <button class="panel-deck">
+      <button class="panel-deck" tabindex="32">
         <span>Factions</span>
         <img src="" alt="" class="deck-back">
       </button>
@@ -134,18 +133,18 @@
       </div>
       <div class="faction-menu">
         <div class="dropdown">
-          <div class="select">
+          <div class="select" tabindex="25">
             <span>Select faction <span id="arrow-icon"></span></span>
           </div>
           <ul class="dropdown-menu close">
-            <li data-faction="neutral" class="option">Neutral</li>
-            <li data-faction="monsters" class="option">Monsters</li>
-            <li data-faction="northern_realms" class="option">Northern Realms</li>
-            <li data-faction="scoia'tael" class="option">Scoia'tael</li>
-            <li data-faction="nilfgaard" class="option">Nilfgard</li>
+            <li data-faction="neutral" class="option" tabindex="26">Neutral</li>
+            <li data-faction="monsters" class="option" tabindex="27">Monsters</li>
+            <li data-faction="northern_realms" class="option" tabindex="28">Northern Realms</li>
+            <li data-faction="scoia'tael" class="option" tabindex="29">Scoia'tael</li>
+            <li data-faction="nilfgaard" class="option" tabindex="30">Nilfgard</li>
           </ul>
         </div>
-        <button id="start">Start</button>
+        <button id="start" tabindex="31">Start</button>
       </div>
     </div>
   </div>
