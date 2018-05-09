@@ -55,17 +55,11 @@ class Player {
 
 const checkCollision = (nX, nY) => {
   let imgData = maze.ctx.getImageData(nX, nY, 10, 10),
-      data = imgData.data.filter((e, i) => i % 4),
+      data = imgData.data,
       collision = false;
   console.log(data);
 
   if (!(nX >= 0 && nX <= maze.width - 25 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
-  for (let i = 0; i < 300; i++) {
-    if (data[i] == 0) {
-      collision = true;
-      break;
-    }
-  }
 
   return collision;
 };
