@@ -25,6 +25,32 @@ class Player {
     maze.ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
+  checkCollision(nX, nY) {
+    let imgData = (() => {
+        if (nX > this.x) {
+          return maze.ctx.getImageData(nX + 2.5, nY, 15, 5);
+        } else if (nX < this.x) {
+          return maze.ctx.getImageData(nX, nY, 15, 5);
+        } else if (nY > this.y) {
+          return maze.ctx.getImageData(nX, nY + 8.5, 5, 15);
+        } else if (nY < this.y) {
+          return maze.ctx.getImageData(nX, nY, 5, 15);
+        }
+      })(),
+        data = imgData.data,
+        collision = false;
+    console.log(data);
+
+    if (!(nX >= 0 && nX <= maze.width - 25 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
+    for (let i = 0; i < 400; i += 4) {
+      if (data[i] === 0) {
+        collision = true;
+        break;
+      }
+    }
+    return collision;
+  }
+
   move(dir) {
     console.log(dir);
     let nX, nY;
@@ -46,23 +72,14 @@ class Player {
         nY = this.y + 22.5;
         break;
     }
-    if (checkCollision(nX, nY)) return; // if collision is true, don't move
+    if (this.checkCollision(nX, nY)) return; // if collision is true, don't move
     this.x = nX;
     this.y = nY;
-    player.update();
+    this.update();
   }
+
 }
 
-const checkCollision = (nX, nY) => {
-  let imgData = maze.ctx.getImageData(nX, nY, 10, 10),
-      data = imgData.data,
-      collision = false;
-  console.log(data);
-
-  if (!(nX >= 0 && nX <= maze.width - 25 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
-
-  return collision;
-};
 
 const player = new Player();
 const maze = new Maze();
