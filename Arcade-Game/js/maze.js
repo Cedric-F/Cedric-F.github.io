@@ -28,13 +28,13 @@ class Player {
   checkCollision(nX, nY) {
     let imgData = (() => {
         if (nX > this.x) {
-          return maze.ctx.getImageData(nX + 2.5, nY, 15, 5);
+          return maze.ctx.getImageData(nX + 2.5, nY, 15, 15);
         } else if (nX < this.x) {
-          return maze.ctx.getImageData(nX, nY, 15, 5);
+          return maze.ctx.getImageData(nX, nY, 15, 15);
         } else if (nY > this.y) {
-          return maze.ctx.getImageData(nX, nY + 8.5, 5, 15);
+          return maze.ctx.getImageData(nX, nY + 8.5, 15, 15);
         } else if (nY < this.y) {
-          return maze.ctx.getImageData(nX, nY, 5, 15);
+          return maze.ctx.getImageData(nX, nY, 15, 15);
         }
       })(),
         data = imgData.data,
@@ -42,7 +42,7 @@ class Player {
     console.log(data);
 
     if (!(nX >= 0 && nX <= maze.width - 25 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
-    for (let i = 0; i < 400; i += 4) {
+    for (let i = 0; i < 4 * 25 * 31; i += 4) {
       if (data[i] === 0) {
         collision = true;
         break;
