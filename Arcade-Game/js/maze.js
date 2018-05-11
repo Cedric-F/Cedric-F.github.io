@@ -14,9 +14,9 @@ class Maze {
 
 class Player {
   constructor(x, y, w, h, sprite) {
-    this.x = 687.5;
-    this.y = 10;
-    this.w = 25;
+    this.x = 684;
+    this.y = 9;
+    this.w = 27;
     this.h = 31;
     this.sprite = 'resources/player.png';
   }
@@ -40,7 +40,7 @@ class Player {
         data = imgData.data.filter((e, i) => !(i % 4)),
         collision = false;
 
-    if (!(nX >= 0 && nX <= maze.width - 25 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
+    if (!(nX >= 0 && nX <= maze.width - 27 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
     for (let i = 0; i < 15 * 15; i++) {
       if (data[i] === 0) {
         collision = true;
@@ -77,6 +77,12 @@ class Player {
     this.x = nX;
     this.y = nY;
     this.update();
+    if (this.x == 729 && this.y == 639) {
+      setTimeout(() => {
+        this.x = 684;
+        this.y = 9;
+      }, 1000);
+    }
   }
 }
 
@@ -128,6 +134,16 @@ class Monster {
   }
 
   checkCollision() {
+
+      if (this.x < player.x + player.w &&
+        this.x + this.w > player.x &&
+        this.y < player.y + player.h &&
+        this.h + this.y > player.y) {
+        setTimeout(() => {
+          player.x = 684;
+          player.y = 9;
+        }, 200)
+}
     let imgData = (() => {
       /*
       this.dir ?
@@ -136,7 +152,7 @@ class Monster {
       */
       switch (this.dir) {
         case 'up':
-          return maze.ctx.getImageData(this.x, this.y - 7, 15, 15);
+          return maze.ctx.getImageData(this.x, this.y - 6, 15, 15);
         case 'down':
           return maze.ctx.getImageData(this.x, this.y + this.h - 10, 15, 15);
         case 'left':
