@@ -84,58 +84,71 @@ class Player {
 }
 
 class Monster {
-  constructor(x, y, w, h, dir, sprite) {
+  constructor(x, y, w, h, paths, dir, sprite) {
     this.x = x;
     this.y = y;
     this.w = 22;
     this.h = 31;
     this.sprite = 'resources/player.png';
-    this.dir = ~~(Math.random() * 2);
+    this.paths = ['up', 'down', 'left', 'right'];
+    this.dir = this.paths[~~(Math.random() * 4)];
   }
 
   update(dt) {
-    let nX = dt * 30;
-    /*if (this.checkCollision(nX)){
-      if (this.dir == 1) {
-        this.dir = 0;
-      } else if (this.dir == 0) {
-        this.dir = 1;
-      }
-    }*/
-    if (this.dir) {
-      if (!this.checkCollision(nX)) {
-        this.x += nX;
-      } else {
-        this.dir = 0;
+    let speed = dt * 75,
+        dir = this.dir,
+        paths = this.paths;
+
+    /*
+     * Small fix to prevent the object from going outside the canvas when the browser is not focusing on the application tab
+     */
+    if (this.x + speed >= maze.width - 5 || this.x - speed <= 0 || this.y + speed >= maze.heigth || this.y - speed <= 0) return "Off canvas";
+
+    if (!this.checkCollision()) {
+      switch (this.dir) {
+        case 'up':
+          this.y -= speed;
+          break;
+        case 'down':
+          this.y += speed;
+          break;
+        case 'left':
+          this.x -= speed;
+          break;
+        case 'right':
+          this.x += speed;
+          break;
       }
     } else {
-      if (!this.checkCollision(nX)) {
-        this.x -= nX;
-      } else {
-        this.dir = 1;
+      while (this.dir == dir) { // Change the direction, excluding the current one.
+        this.dir = paths.filter(e => e != dir)[~~(Math.random() * 3)];
       }
+      console.log(this.dir);
     }
-    /*
-     * Check the direction, then if a collision occurs in this direction.
-     * If it does, change the direction.
-     */
   }
 
   render() {
     maze.ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-  checkCollision(nX) {
-    let imgData = (() =>
+  checkCollision() {
+    let imgData = (() => {
+      /*
       this.dir ?
       maze.ctx.getImageData(this.x + this.w + nX, this.y, 15, 15) :
       maze.ctx.getImageData(this.x - nX, this.y, 15, 15)
-      /*if (this.dir == 1 && nX > this.x) {
-        return maze.ctx.getImageData(nX + 2.5, this.y, 15, 15);
-      } else if (this.dir == 0 && nX < this.x) {
-        return maze.ctx.getImageData(nX, this.y, 15, 15);
-      }*/
-    )(),
+      */
+      switch (this.dir) {
+        case 'up':
+          return maze.ctx.getImageData(this.x, this.y - 7, 15, 15);
+        case 'down':
+          return maze.ctx.getImageData(this.x, this.y + this.h - 10, 15, 15);
+        case 'left':
+          return maze.ctx.getImageData(this.x - 5, this.y, 15, 31);
+        case 'right':
+          return maze.ctx.getImageData(this.x + this.w - 5, this.y, 15, 31);
+      }
+    })(),
         data = imgData.data.filter((e, i) => !(i % 4)),
         collision = false;
 
@@ -151,7 +164,7 @@ class Monster {
 
 const player = new Player();
 const maze = new Maze();
-const allEnemies = [new Monster(20, 10)];
+const allEnemies = [new Monster(22.5, 10), new Monster(507.5, 100), new Monster(12.5, 640), new Monster(507.5, 370), new Monster(1317.5, 640), new Monster(1092.5, 235), new Monster(687.5, 415)];
 
 
 document.addEventListener('keydown', function(e) {
