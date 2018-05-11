@@ -85,7 +85,8 @@ let engine = ((global) => {
    */
   Resources.load([
     'resources/maze.png',
-    'resources/player.png'
+    'resources/player.png',
+    'resources/enemy.png'
   ]);
 
   Resources.onReady(init);

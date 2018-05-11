@@ -39,7 +39,6 @@ class Player {
       })(),
         data = imgData.data.filter((e, i) => !(i % 4)),
         collision = false;
-    console.log(data);
 
     if (!(nX >= 0 && nX <= maze.width - 25 && nY >= 0 && nY <= maze.height - 31)) collision = true; // Prevents from going off canvas
     for (let i = 0; i < 15 * 15; i++) {
@@ -52,7 +51,6 @@ class Player {
   }
 
   move(dir) {
-    console.log(dir);
     let nX, nY;
     switch (dir) {
       case 'left':
@@ -79,7 +77,6 @@ class Player {
     this.x = nX;
     this.y = nY;
     this.update();
-    console.log(this);
   }
 }
 
@@ -89,7 +86,7 @@ class Monster {
     this.y = y;
     this.w = 22;
     this.h = 31;
-    this.sprite = 'resources/player.png';
+    this.sprite = 'resources/enemy.png';
     this.paths = ['up', 'down', 'left', 'right'];
     this.dir = this.paths[~~(Math.random() * 4)];
   }
@@ -123,7 +120,6 @@ class Monster {
       while (this.dir == dir) { // Change the direction, excluding the current one.
         this.dir = paths.filter(e => e != dir)[~~(Math.random() * 3)];
       }
-      console.log(this.dir);
     }
   }
 
