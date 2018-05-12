@@ -3,6 +3,11 @@ body, html {
 	margin: 0;
 }
 
+canvas {
+	display: block;
+	margin: 5px auto;
+}
+
 .modal {
 	display: flex;
 	align-items: center;
@@ -22,7 +27,8 @@ body, html {
 	padding: 10px;
 }
 
-.attachments {
+.attachments,
+.items {
 	display: flex;
 	list-style: none;
 	width: 300px;
@@ -46,6 +52,52 @@ body, html {
 	display: block;
 }
 
+.items {
+	width: 500px;
+}
+
+.items .chest,
+.items .key,
+.items .map {
+	width: 32px;
+	height: 32px;
+	display: block;
+}
+
+.items span {
+	opacity: 0.5;
+}
+
+.items .gem {
+	width: 32px;
+	height: 32px;
+	display: flex;
+}
+
+.items .gem span {
+	display: block;
+}
+
+.diamonds {
+	background-image: url(../resources/sprites.png);
+	background-position: left 128px top 0px;
+}
+
+.rubies {
+	background-image: url(../resources/sprites.png);
+	background-position: right 192px top 0px;
+}
+
+.sapphires {
+	background-image: url(../resources/sprites.png);
+	background-position: right 224px top 0px;
+}
+
+.topaz {
+	background-image: url(../resources/sprites.png);
+	background-position: right 256px top 0px;
+}
+
 .chest {
 	background-image: url(../resources/sprites.png);
 	background-position: left 0px top 0px;
@@ -63,6 +115,10 @@ body, html {
 
 .end {
 	display: none;
+}
+
+.end h1 {
+	text-align: center;
 }
 
 .off {

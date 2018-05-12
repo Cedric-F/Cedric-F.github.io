@@ -3,7 +3,6 @@ const modal = {
   start: document.querySelector('.start'),
   end: document.querySelector('.end'),
   closeBtn: document.querySelector('.off'),
-  replay: document.querySelector('.restart'),
   open: function() {this.container.style.display = 'flex';},
   close: function() {this.container.style.display = 'none';}
 }
@@ -27,9 +26,20 @@ class Player {
   constructor() {
     this.x = 684;
     this.y = 9;
+    this.spawn = {
+      x: 684,
+      y: 9
+    };
     this.w = 27;
     this.h = 31;
     this.sprite = './resources/player.png';
+    this.inventory = {
+      dom: document.querySelectorAll('.count'),
+      diamonds: 0,
+      rubies: 0,
+      sapphires: 0,
+      topaz: 0
+    };
   }
 
   update() {
@@ -65,18 +75,22 @@ class Player {
     let nX, nY;
     switch (dir) {
       case 'left':
+        this.movesX++;
         nX = this.x - 22.5;
         nY = this.y;
         break;
       case 'up':
+        this.movesY++;
         nX = this.x;
         nY = this.y - 22.5;
         break;
       case 'right':
+        this.movesX++;
         nX = this.x + 22.5;
         nY = this.y;
         break;
       case 'down':
+        this.movesY++;
         nX = this.x;
         nY = this.y + 22.5;
         break;
@@ -84,11 +98,10 @@ class Player {
     }
 
     if (this.checkCollision(nX, nY)) return; // if collision is true, don't move
-
     this.x = nX;
     this.y = nY;
     this.update();
-    if (this.x == 729 && this.y == 639 && maze.stage == 2) {
+    if (this.x == 864 && this.y == 639 && maze.stage == 2) {
       setTimeout(() => {
         this.x = -100;
         this.y = -100;
@@ -102,6 +115,10 @@ class Player {
 
 class Monster {
   constructor(x, y) {
+    this.spawn = {
+      x: x,
+      y: y
+    };
     this.x = x;
     this.y = y;
     this.w = 22;
@@ -140,7 +157,7 @@ class Monster {
       }
     } else {
       while (this.dir == dir) { // Change the direction when it's too redundant
-        this.dir = paths.filter(e => e != dir)[~~(Math.random() * 3)];
+        this.dir = paths[~~(Math.random() * 4)];
       }
     }
   }
@@ -224,26 +241,63 @@ class Collectible {
   }
 
   update() {
+    let count;
     if (this.x < player.x + player.w &&
         this.x + this.w > player.x &&
         this.y < player.y + player.h &&
         this.h + this.y > player.y) {
       if (this.visible) {
-        if (this.name == 'map') {
-          objects.forEach(o => o.name != 'Gems' ? o.visible = true : 0);
-        }
-        if (this.name != 'chest') {
-          this.visible = false;
-          this.picked = true;
-        } else {
-          if (objects[1].picked) {
-            this.type = 1;
-            setTimeout(() => {
-              maze.img.src = './resources/maze2.png';
-              maze.stage = 2;
-              objects.forEach(o => o.name == 'Gems' ? o.visible = true : 0);
-            }, 1000);
-          }
+        switch(this.type) {
+          case 0:
+            if (objects[1].picked) {
+              this.type = 1;
+              setTimeout(() => {
+                maze.img.src = './resources/maze2.png';
+                maze.stage = 2;
+                objects.forEach(o => o.name == 'Gems' ? o.visible = true : 0);
+              }, 750);
+              document.querySelector('.items li .chest').style.opacity = 1;
+            }
+            break;
+          case 2:
+            objects.forEach(o => o.name != 'Gems' ? o.visible = true : 0);
+            this.picked = true;
+            this.visible = false;
+            document.querySelector('.items li .map').style.opacity = 1;
+            break;
+          case 3:
+            this.picked = true;
+            this.visible = false;
+            document.querySelector('.items li .key').style.opacity = 1;
+            break;
+          case 4:
+            count = player.inventory.dom[0];
+            player.inventory.diamonds++;
+            this.visible = false;
+            count.textContent++;
+            document.querySelectorAll('#gem-d span').forEach(e => e.style.opacity = 1);
+            break;
+          case 5:
+            count = player.inventory.dom[1];
+            this.visible = false;
+            player.inventory.rubies++;
+            count.textContent++;
+            document.querySelectorAll('#gem-r span').forEach(e => e.style.opacity = 1);
+            break;
+          case 6:
+            count = player.inventory.dom[2];
+            this.visible = false;
+            player.inventory.sapphires++;
+            count.textContent++;
+            document.querySelectorAll('#gem-s span').forEach(e => e.style.opacity = 1);
+            break;
+          case 7:
+            count = player.inventory.dom[3];
+            this.visible = false;
+            player.inventory.topaz++;
+            count.textContent++;
+            document.querySelectorAll('#gem-t span').forEach(e => e.style.opacity = 1);
+            break;
         }
       }
     }
