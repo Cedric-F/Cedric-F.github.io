@@ -51,6 +51,7 @@ let engine = ((global) => {
    * render methods.
    */
   const updateEntities = (dt) => {
+    objects.forEach(object => object.update(dt));
     allEnemies.forEach(enemy => enemy.update(dt));
     player.update();
   };
@@ -75,6 +76,7 @@ let engine = ((global) => {
     /* Loop through all of the objects within the allEnemies array and call
      * the render function you have defined.
      */
+    objects.forEach(object => object.render());
     allEnemies.forEach(enemy => enemy.render());
     player.update();
   };
@@ -84,9 +86,11 @@ let engine = ((global) => {
    * all of these images are properly loaded our game will start.
    */
   Resources.load([
-    'resources/maze.png',
-    'resources/player.png',
-    'resources/enemy.png'
+    './resources/maze.png',
+    './resources/maze2.png',
+    './resources/player.png',
+    './resources/enemy.png',
+    './resources/sprites.png'
   ]);
 
   Resources.onReady(init);
