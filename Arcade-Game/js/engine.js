@@ -6,24 +6,28 @@ let engine = ((global) => {
     let now = Date.now(),
         dt = (now - lastTime) / 1000.0;
 
-    /* Call our update/render functions, pass along the time delta to
+    /*
+     * Call our update/render functions, pass along the time delta to
      * our update function since it may be used for smooth animation.
      */
     update(dt);
     render();
 
-    /* Set our lastTime variable which is used to determine the time delta
+    /*
+     * Set our lastTime variable which is used to determine the time delta
      * for the next time this function is called.
      */
     lastTime = now;
 
-    /* Use the browser's requestAnimationFrame function to call this
+    /*
+     * Use the browser's requestAnimationFrame function to call this
      * function again as soon as the browser is able to draw another frame.
      */
     win.requestAnimationFrame(main);
   };
 
-  /* This function does some initial setup that should only occur once,
+  /*
+   * This function does some initial setup that should only occur once,
    * particularly setting the lastTime variable that is required for the
    * game loop.
    */
@@ -32,23 +36,15 @@ let engine = ((global) => {
     main();
   };
 
-  /* This function is called by main (our game loop) and itself calls all
-   * of the functions which may need to update entity's data. Based on how
-   * you implement your collision detection (when two entities occupy the
-   * same space, for instance when your character should die), you may find
-   * the need to add an additional function call here. For now, we've left
-   * it commented out - you may or may not want to implement this
-   * functionality this way (you could just implement collision detection
-   * on the entities themselves within your app.js file).
+  /*
+   * This function is called by main (game loop) and itself calls all
+   * of the functions which may need to update entity's data.
    */
   const update = (dt) => updateEntities(dt);
 
-  /* This is called by the update function and loops through all of the
-   * objects within your allEnemies array as defined in app.js and calls
-   * their update() methods. It will then call the update function for your
-   * player object. These update methods should focus purely on updating
-   * the data/properties related to the object. Do your drawing in your
-   * render methods.
+  /*
+   * This is called by the update function and loops through all of the
+   * objects and calls their update() methods.
    */
   const updateEntities = (dt) => {
     objects.forEach(object => object.update(dt));
@@ -56,11 +52,9 @@ let engine = ((global) => {
     player.update();
   };
 
-  /* This function initially draws the "game level", it will then call
-   * the renderEntities function. Remember, this function is called every
-   * game tick (or loop of the game engine) because that's how games work -
-   * they are flipbooks creating the illusion of animation but in reality
-   * they are just drawing the entire screen over and over.
+  /*
+   * This function initially draws the "game level", it will then call
+   * the renderEntities function.
    */
   const render = () => {
     maze.ctx.clearRect(0,0, maze.width, maze.height)
@@ -68,22 +62,21 @@ let engine = ((global) => {
     renderEntities();
   };
 
-  /* This function is called by the render function and is called on each game
-   * tick. Its purpose is to then call the render functions you have defined
-   * on your enemy and player entities within app.js
+  /*
+   * This function is called by the render function and is called on each game
+   * tick. Its purpose is to then call the entities' render methods.
    */
   const renderEntities = () => {
-    /* Loop through all of the objects within the allEnemies array and call
-     * the render function you have defined.
+    /*
+     * Loop over the collectibles and enemies arrays to draw them on the canvas
      */
     objects.forEach(object => object.render());
     allEnemies.forEach(enemy => enemy.render());
     player.update();
   };
 
-  /* Go ahead and load all of the images we know we're going to need to
-   * draw our game level. Then set init as the callback method, so that when
-   * all of these images are properly loaded our game will start.
+  /*
+   * Pre-cache all the required image to properly draw the canvas.
    */
   Resources.load([
     './resources/maze.png',
