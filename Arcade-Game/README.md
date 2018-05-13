@@ -46,4 +46,4 @@ The rules are simple:
 
 ## Credits
 
-- Sprites exracted from RPG Maker MV
+- Sprites exracted from RPG Maker MV and https://opengameart.org/
