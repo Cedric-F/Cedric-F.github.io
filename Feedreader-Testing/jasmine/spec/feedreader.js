@@ -19,19 +19,19 @@ $(
 
       /*
        * Loop over the feeds and see if they have a declared url and name.
-       * If it has, check their boolean value. An empty string evaluates to false.
+       * If it has, check their length. An empty string evaluates to false.
        */
 
       it("have a defined and valid url", () =>
         allFeeds.forEach(feed => {
           expect(feed.url).toBeDefined();
-          expect(Boolean(feed.url)).toBe(true);
+          expect(feed.url.length).not.toBe(0);
         }));
 
       it("have a defined and valid name", () =>
         allFeeds.forEach(feed => {
           expect(feed.name).toBeDefined();
-          expect(Boolean(feed.name)).toBe(true);
+          expect(feed.name.length).not.toBe(0);
         }));
     });
 
