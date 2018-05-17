@@ -4,9 +4,13 @@ A Udacity Front-End Nanodegree Project.
 
 ## Getting started
 
-*Cloning the repository*
-`git clone https://github.com/Cedric-F/Cedric-F.github.io.git`
-Browse to the `Feedreader-Testing` directory. If needed, move it somewhere else.
+**Cloning the repository**
+```
+git clone https://github.com/Cedric-F/Cedric-F.github.io.git
+```
+
+Browse to the `Feedreader-Testing` directory.
+If needed, move it somewhere else.
 Open `index.html` in favorite browser.
 
 ### Compatibility
