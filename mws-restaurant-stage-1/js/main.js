@@ -1,3 +1,9 @@
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('sw.js')
+  .then(r => console.log(`Service Worker initialized (${r.scope})`))
+  .catch(err => console.log(`An error occured when trying to load serviceWorker. ${err}`));
+}
+
 let restaurants,
   neighborhoods,
   cuisines
@@ -179,11 +185,3 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 }
-
-window.addEventListener('load', () => {
-  if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('sw.js')
-    .then(r => console.log(`Service Worker initialized (${r.scope})`))
-    .catch(err => console.log(`An error occured when trying to load serviceWorker. ${err}`));
-  }
-})

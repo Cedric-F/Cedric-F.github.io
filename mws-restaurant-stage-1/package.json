@@ -1,0 +1,21 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Restaurant Reviews Static page application. Udacity FEND project.",
+  "main": "./js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "cedric-f.github.io"
+  },
+  "keywords": [
+    "\"Restaurant",
+    "Reviews",
+    "stage",
+    "1\""
+  ],
+  "author": "Cedric-F <cedric.fontaine@gmx.fr>",
+  "license": "MIT"
+}

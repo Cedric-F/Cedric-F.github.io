@@ -1,4 +1,3 @@
 @echo
-python -m http.server 8000
-@echo
-@echo
+start "" http://localhost:8080
+http-server ./
